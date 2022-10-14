@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/exus")
 public class MainController {
 
-	@GetMapping("/main")
+	@GetMapping("/view")
 	public String exusMainView() {
 		return "exus/main";
 	}
+	
+	
 	
 }

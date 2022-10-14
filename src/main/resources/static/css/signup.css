@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.text-decoration-none:link {
+	text-decoration:none;
+}
+
+.outline {
+	outline: 1px solid #BDBDBD;
+}
+
+
+.sign-up {
+	width: 500px;
+}
+
+.bg-mint {
+	background-color: #58FAD0;
+	opacity: 0.5;
+}
+
+.z-index1 {
+	z-index: 1;
+}
+
+.z-index2 {
+	z-index: 2;
+}
+
+.z-index3 {
+	z-index: 3;
+}
