@@ -45,9 +45,9 @@
 					<span class="text-secondary font-weight-bold col-3 mt-1">휴대폰 번호</span>
 					<div class="d-flex col-9 ml-2">
 						<input type="text" class="form-control col-3 btn-light outline" placeholder="010">
-						<span class="mx-2 col-1">-</span>
+						<span class="mx-2 col-1 mt-1">-</span>
 						<input type="text" class="form-control col-3 btn-light outline" placeholder="1111">
-						<span class="mx-2 col-1">-</span>
+						<span class="mx-2 col-1 mt-1">-</span>
 						<input type="text" class="form-control col-3 btn-light outline" placeholder="2222">
 					</div>
 				</div>
@@ -77,6 +77,14 @@
 					<span class="text-dark font-weight-bold mt-1 mr-4 ml-1">동</span>
 				</div>
 				<%-- 주소 --%>
+				
+				<%-- 성별 --%>
+				<div class="mb-4">
+				<span class="text-secondary font-weight-bold mr-5">성별</span>
+				<small class="mx-5"><input type="radio" name="chk_sex" value="man">남성</small>
+				<small class="ml-5"><input type="radio" name="chk_sex" value="woman">여성</small>
+				</div>
+				<%-- 성별 --%>
 				
 				<%-- 키/몸무게 --%>
 				<span class="text-secondary font-weight-bold">키 / 목표 몸무게 (선택)</span>
@@ -111,36 +119,36 @@
 		<%-- 정보수정 전체 --%>
 			
 	</div>
+		
+	<script>
 	
-<script>
-
-$(document).ready(function() {
+		$(document).ready(function() {
+			
+			$("#textBox").on("input", function (e) {
+				let content = $(this).val();
+			    
+			    // 글자수 제한
+			    if (content.length > 100) {
+			    	// 100자 부터는 타이핑 되지 않도록
+			        $(this).val($(this).val().substring(0, 100));
+			    	content = $(this).val();
+			        // 100자 넘으면 알림창 뜨도록
+			        alert("글자수는 100자까지 입력 가능합니다.");
+			    };
+			    
+			    // 글자수 세기
+			    if (content.length == 0 || content == "") {
+			    	$(".textCount").text("0자");
+			    } else {
+			    	$(".textCount").text(content.length + "자");
+			    }
+			    
+			});
+			
+		});
 	
-	$("#textBox").on("input", function (e) {
-		let content = $(this).val();
-	    
-	    // 글자수 제한
-	    if (content.length > 100) {
-	    	// 100자 부터는 타이핑 되지 않도록
-	        $(this).val($(this).val().substring(0, 100));
-	    	content = $(this).val();
-	        // 100자 넘으면 알림창 뜨도록
-	        alert("글자수는 100자까지 입력 가능합니다.");
-	    };
-	    
-	    // 글자수 세기
-	    if (content.length == 0 || content == "") {
-	    	$(".textCount").text("0자");
-	    } else {
-	    	$(".textCount").text(content.length + "자");
-	    }
-	    
-	});
 	
-});
-
-
-</script>
+	</script>
 	
 </body>
 </html>
