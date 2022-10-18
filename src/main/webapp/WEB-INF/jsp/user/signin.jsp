@@ -15,7 +15,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-	<link rel="stylesheet" href="/static/css/signup.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/user.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/header.css" type="text/css">
 
 </head>
@@ -54,9 +54,9 @@
 						<span class="text-secondary font-weight-bold mt-2">계정이 없으신가요?</span>					
 					</div>
 					<div class="mt-4 pb-5">
-						<div class="bg-mint z-index1 w-100 justify-content-center align-items-center d-flex">
+						<div class="bg-mint w-100 justify-content-center align-items-center d-flex z-index1">
 							<a href="#" class="text-decoration-none z-index2">						
-								<h3 class="text-dark font-weight-bold z-index3">회원가입 하러 가기</h3>
+								<h3 class="text-primary font-weight-bold mt-1 z-index3">회원가입 하러 가기</h3>
 							</a>
 						</div>
 					</div>

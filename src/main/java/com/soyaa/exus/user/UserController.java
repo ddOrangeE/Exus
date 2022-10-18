@@ -17,4 +17,10 @@ public class UserController {
 	public String signunView() {
 		return "user/signin";
 	}
+	
+	// 정보수정 화면
+	@GetMapping("/user/revise/view")
+	public String reviseView() {
+		return "user/revise";
+	}
 }

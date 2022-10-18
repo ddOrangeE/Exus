@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.text-decoration-none:link {
+	text-decoration:none;
+}
+
+.outline {
+	outline: 1px solid #BDBDBD;
+}
+
+
+.sign-up {
+	width: 500px;
+}
+
+.bg-mint {
+	background-color: rgb(130, 247, 208);
+}
+
+
+.add-image {
+	background-color: #00FFBF;
+	width: 250px;
+	height: 35px;
+	border: 1px solid  rgb(130, 247, 208);
+	border-radius: 2em;
+}
+
+.visibility {
+	visibility: hidden;
+}
+
+.introduce-font {
+	font-size: 12px;
+	resize: none;
+}
