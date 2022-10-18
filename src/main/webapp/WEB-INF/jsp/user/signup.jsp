@@ -68,6 +68,9 @@
 							 <option value="gmail.com">gmail.com</option>
 					</select>				
 				</div>
+				<div class="d-flex justify-content-end">
+					<input type="text" class="form-control col-5 btn-light outline d-none" id="writeDomain">
+				</div>
 				<%-- 이메일 --%>
 				
 				<%-- 비밀번호 --%>
@@ -117,14 +120,39 @@
 	
 	<script>
 		$(document).ready(function() {
-			$("#signupBtn").on("click", function() {
+			
+			var domain = "";
+			$("#emailDomainInput").on("change", function() {
+				
+				let selectValue = $(this).val();
+				
+				if(selectValue == "") {
+					domain == "";
+					$("#writeDomain").addClass("d-none");
+					alert(domain);
+				} else if(selectValue == 1) {
+					$("#writeDomain").removeClass("d-none");
+					domain = $("#writeDomain").val();
+					alert(domain);
+				} else {
+					$("#writeDomain").addClass("d-none");
+					domain = $("#emailDomainInput").val();
+					alert(domain);
+				}
+				
+			});
+			
+			
+			$("#signupBtn").on("click", function(e) {
+				
+				e.preventDefault();
 				
 				let email_rule =  /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 				
 				let name = $("#nameInput").val();
 				let userName = $("#userNameInput").val();
 				let phoneNumber = $("#mpStartInput").val() + "-" + $("#mpMiddleInput").val() + "-" + $("#mpEndInput").val();
-				let email = $("#emailInput").val() + "@" + $("#passwordConfirmInput").val();
+				let email = $("#emailInput").val() + "@" + domain;
 				let password = $("#password").val();
 				let passwordConfirm = $("#passwordConfirmInput").val();
 				let address = $("#siInput").val() + "시" + $("#guInput").val() + "구" + $("#dongInput").val() + "동";
@@ -132,8 +160,23 @@
 				let height = $("#heightInput").val();
 				let weight = $("#weightInput").val();
 				
+				if(name == "") {
+					alert("이름을 입력해주세요.");
+				}
 				
+				if(userName == "") {
+					alert("사용자 이름을 입력해주세요.");
+				}
 				
+				if($("#mpStartInput").val() == "" || $("#mpMiddleInput").val() == "" || $("#mpEndInput").val() == "") {
+					alert("핸드폰 번호를 입력해주세요.");
+				}
+				
+				if($("#emailInput").val() == "" || domain == "") {
+					alert("이메일을 입력해주세요.");
+				}
+				
+				alert(name + userName + phoneNumber + email);
 			});
 			
 		});
