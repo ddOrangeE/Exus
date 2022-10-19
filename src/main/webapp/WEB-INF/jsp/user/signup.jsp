@@ -121,6 +121,7 @@
 	<script>
 		$(document).ready(function() {
 			
+			
 			var domain = null;
 			$("#emailDomainInput").on("change", function() {
 				
@@ -141,6 +142,7 @@
 			});
 			
 			
+			var param = {};
 			$("#signupBtn").on("click", function(e) {
 				
 				e.preventDefault();
@@ -221,20 +223,30 @@
 					return;
 				}
 				
-				if(height == "") {
-					height = null;
+				param["name"] = name;
+				param["userName"] = userName;
+				param["phoneNumber"] = phoneNumber;
+				param["email"] = email;
+				param["password"] = password;
+				param["address"] = address;
+				param["sex"] = sex;
+				
+				if(height != "") {
+					param["height"] = height;
 				}
 				
-				if(weight == "") {
-					weight = null;
+				if(weight != "") {
+					param["weight"] = weight;
 				}
 				
 				alert(name + userName + phoneNumber + email + password + address + sex + height + weight);
 				
+				
+				
 				$.ajax({ 
 					type:"post"
 					, url:"/user/signup"
-					, data:{"name":name, "userName":userName, "phoneNumber":phoneNumber, "email":email, "password":password, "address":address, "sex":sex, "height":height, "weight":weight}
+					, data:param
 					, success:function(data) {
 						if(data.result == "success") {
 							location.href = "/user/signin/view"
