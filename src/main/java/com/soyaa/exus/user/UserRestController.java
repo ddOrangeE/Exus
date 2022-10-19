@@ -23,15 +23,15 @@ public class UserRestController {
 	public Map<String, String> signup(
 			@RequestParam("name") String name
 			, @RequestParam("userName") String userName
-			, @RequestParam("phoneNumber") String PhoneNumber
+			, @RequestParam("phoneNumber") String phoneNumber
 			, @RequestParam("email") String email
 			, @RequestParam("password") String password
 			, @RequestParam("address") String address
 			, @RequestParam("sex") String sex
-			, @RequestParam("height") double height
-			, @RequestParam("weight") double weight ) {
+			, @RequestParam("height") Double height
+			, @RequestParam("weight") Double weight ) {
 		
-		int count = userBO.addUser(name, userName, PhoneNumber, email, password, address, sex, height, weight);
+		int count = userBO.addUser(name, userName, phoneNumber, email, password, address, sex, height, weight);
 		
 		Map<String, String> result = new HashMap<>();
 		

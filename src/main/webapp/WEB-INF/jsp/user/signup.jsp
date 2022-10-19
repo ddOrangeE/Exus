@@ -121,23 +121,21 @@
 	<script>
 		$(document).ready(function() {
 			
-			var domain = "";
+			var domain = null;
 			$("#emailDomainInput").on("change", function() {
 				
 				let selectValue = $(this).val();
+				$("#wirteDomain").val("");
+				domain = null;
 				
 				if(selectValue == "") {
-					domain == "";
 					$("#writeDomain").addClass("d-none");
-					alert(domain);
 				} else if(selectValue == 1) {
 					$("#writeDomain").removeClass("d-none");
-					domain = $("#writeDomain").val();
-					alert(domain);
+					domain = 1;
 				} else {
 					$("#writeDomain").addClass("d-none");
 					domain = $("#emailDomainInput").val();
-					alert(domain);
 				}
 				
 			});
@@ -153,30 +151,103 @@
 				let userName = $("#userNameInput").val();
 				let phoneNumber = $("#mpStartInput").val() + "-" + $("#mpMiddleInput").val() + "-" + $("#mpEndInput").val();
 				let email = $("#emailInput").val() + "@" + domain;
-				let password = $("#password").val();
+				let password = $("#passwordInput").val();
 				let passwordConfirm = $("#passwordConfirmInput").val();
-				let address = $("#siInput").val() + "시" + $("#guInput").val() + "구" + $("#dongInput").val() + "동";
-				let sex = $("input[name=sex]:checked").val();
+				let address = $("#siInput").val() + "시 " + $("#guInput").val() + "구 " + $("#dongInput").val() + "동";
+				let sex = $("input[name=chk_sex]:checked").val();
 				let height = $("#heightInput").val();
 				let weight = $("#weightInput").val();
 				
 				if(name == "") {
 					alert("이름을 입력해주세요.");
+					return;
 				}
 				
 				if(userName == "") {
 					alert("사용자 이름을 입력해주세요.");
+					return;
 				}
 				
 				if($("#mpStartInput").val() == "" || $("#mpMiddleInput").val() == "" || $("#mpEndInput").val() == "") {
 					alert("핸드폰 번호를 입력해주세요.");
+					return;
 				}
 				
-				if($("#emailInput").val() == "" || domain == "") {
+				if(domain == 1) {
+					domain = $("#writeDomain").val();
+					email = $("#emailInput").val() + "@" + domain;
+				}
+				
+				if($("#emailInput").val() == "") {
 					alert("이메일을 입력해주세요.");
+					return;
 				}
 				
-				alert(name + userName + phoneNumber + email);
+				if(domain == null || 
+						(domain == 1 && $("#writeDomain").val() == "")) {
+					alert("이메일 도메인을 확인해주세요.");
+					return;
+				}
+				
+				if(!email_rule.test(email)){
+				    alert("이메일을 형식에 맞게 입력해주세요.");
+				    return;
+				  }
+				
+				if(password == "") {
+					alert("비밀번호를 입력해주세요.");
+					return;
+				}
+				
+				if(passwordConfirm == "") {
+					alert("비밀번호를 확인해주세요.");
+					return;
+				}
+				
+				if(password != passwordConfirm) {
+					alert("비밀번호가 일치하지 않습니다.");
+					return;
+				}
+				
+				if($("#siInput").val() == "" ||
+						$("#guInput").val() == "" ||
+								$("#dongInput").val() == "") {
+					alert("주소를 확인해주세요.");
+					return;
+				}
+				
+				if(!$("input:radio[name=chk_sex]").is(":checked")) {
+					alert("성별을 체크해주세요.");
+					return;
+				}
+				
+				if(height == "") {
+					height = null;
+				}
+				
+				if(weight == "") {
+					weight = null;
+				}
+				
+				alert(name + userName + phoneNumber + email + password + address + sex + height + weight);
+				
+				$.ajax({ 
+					type:"post"
+					, url:"/user/signup"
+					, data:{"name":name, "userName":userName, "phoneNumber":phoneNumber, "email":email, "password":password, "address":address, "sex":sex, "height":height, "weight":weight}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href = "/user/signin/view"
+						} else {
+							alert("회원가입 실패");
+						}
+					}
+					, error:function() {
+						alert("회원가입 에러");
+					}
+				});
+				
+				
 			});
 			
 		});

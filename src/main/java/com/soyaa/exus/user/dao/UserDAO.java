@@ -13,7 +13,7 @@ public interface UserDAO {
 			, @Param("password") String password
 			, @Param("address") String address
 			, @Param("sex") String sex
-			, @Param("height") double height
-			, @Param("weight") double weight);
+			, @Param("height") Double height
+			, @Param("weight") Double weight);
 
 }

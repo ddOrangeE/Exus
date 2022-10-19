@@ -20,8 +20,8 @@ public class UserBO {
 			, String password
 			, String address
 			, String sex
-			, double height
-			, double weight) {
+			, Double height
+			, Double weight) {
 		
 		return userDAO.insertUser(name, userName, phoneNumber, email, password, address, sex, height, weight);
 		
