@@ -13,6 +13,11 @@ public class MainController {
 		return "exus/main";
 	}
 	
+	@GetMapping("/main/view") 
+	public String signInMain() {
+		return "/exus/sign_main";
+	}
+	
 	
 	
 }

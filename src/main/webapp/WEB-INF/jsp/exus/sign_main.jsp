@@ -16,11 +16,37 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="/static/css/header.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/sign_main.css" type="text/css">
 
 </head>
 <body>
 	<div id="wrap">
+	<%--
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
+	 --%>
+		<header>
+			<div class="d-flex">			
+				<a href="#" class="text-decoration-none col-6">
+					<h1 class="text-white font-weight-bold pt-1 ml-2">Exus</h1>
+				</a>
+				
+				<div class="d-flex justify-content-end col-6">
+					<%-- 아이콘 --%>
+					<div class="d-flex align-items-center mr-5">
+						<a href="#"><i class="bi bi-house-fill text-white h4"></i></a>
+						<a href="#"><i class="bi bi-heart-fill text-white h4 ml-3 mt-1"></i></a>
+						<a href="#"><i class="bi bi-chat-fill text-white h4 ml-3"></i></a>
+					</div>
+					<%-- 아이콘 --%>
+					
+					<%-- 닉네임 / 프로필 사진 --%>
+					<div class="d-flex align-items-center ml-3">
+						<h5 class="text-white mr-2">soyaa</h5>
+						<img src="#" alt="프로필 사진">
+					</div>
+				</div>
+			</div>
+		</header>
 		
 	</div>
 
