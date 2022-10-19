@@ -56,7 +56,7 @@
 						</div>
 						<div class="mt-4 pb-5">
 							<div class="bg-mint w-100 justify-content-center align-items-center d-flex z-index1">
-								<a href="#" class="text-decoration-none z-index2">						
+								<a href="/user/signup/view" class="text-decoration-none z-index2">						
 									<h3 class="text-primary font-weight-bold mt-1 z-index3">회원가입 하러 가기</h3>
 								</a>
 							</div>

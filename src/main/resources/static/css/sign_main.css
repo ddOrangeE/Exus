@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.text-decoration-none:link {
+	text-decoration:none;
+}
+
 .heart-icon {
 	margin-top: 20px;
 }
