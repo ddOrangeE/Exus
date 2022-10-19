@@ -34,9 +34,13 @@
 				<%-- 성명입력 --%>
 
 				<%-- 사용자이름 --%>				
-				<div class="d-flex my-3">
-					<input type="text" placeholder="사용자 이름을 입력하세요" class="form-control btn-light outline" id="userNameInput">
-					<button type="button" class="btn btn-dark ml-1">중복확인</button>
+				<div class="my-3">
+					<div class="d-flex">
+						<input type="text" placeholder="사용자 이름을 입력하세요" class="form-control btn-light outline" id="userNameInput">
+						<button type="button" class="btn btn-dark ml-1" id="isDuplicateBtn">중복확인</button>
+					</div>
+					<small class="text-danger d-none" id="duplicate">중복되었습니다.<i class="bi bi-emoji-frown"></i></small>
+					<small class="text-primary d-none" id="noDuplicate">사용가능한 사용자 이름입니다.<i class="bi bi-emoji-smile"></i></small>
 				</div>
 				<%-- 사용자이름 --%>
 				
@@ -121,6 +125,50 @@
 	<script>
 		$(document).ready(function() {
 			
+			var isDuplicateCheck = false;
+			var isDuplicate = true;
+			
+			// 사용자가 아이디 인풋을 건드는 순간 중복체크 관련 모든 사항을 초기화
+			$("#userNameInput").on("input", function() {
+				isDuplicateCheck = false;
+				isDuplicate = true;
+				
+				$("#duplicate").addClass("d-none");
+				$("#noDuplicate").addClass("d-none");
+			});
+			
+			$("#isDuplicateBtn").on("click", function() {
+				
+				let userName = $("#userNameInput").val();
+				
+				if(userName == "") {
+					alert("아이디를 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"get"
+					, url:"/user/duplicate_id"
+					, data:{"userName":userName}
+					, success:function(data) {
+						if(data.id_duplicate) {							
+							$("#duplicate").removeClass("d-none");
+							$("#noDuplicate").addClass("d-none");
+							isDuplicateCheck = true;
+							isDuplicate = true;
+						} else {
+							$("#duplicate").addClass("d-none");
+							$("#noDuplicate").removeClass("d-none");
+							isDuplicateCheck = true;
+							isDuplicate = false;
+						}
+					}
+					, error:function() {
+						alert("중복확인 에러");
+					}
+				});
+				
+			});
 			
 			var domain = null;
 			$("#emailDomainInput").on("change", function() {
@@ -167,6 +215,18 @@
 				
 				if(userName == "") {
 					alert("사용자 이름을 입력해주세요.");
+					return;
+				}
+				
+				// 중복체크 여부 확인 (중복체크가 진행되지 않으면 return)
+				if(!isDuplicateCheck) {
+					alert("중복확인을 해주세요.");
+					return;
+				}
+				
+				// 아이디 중복확인 (중복된 상태면 return)
+				if(isDuplicate) {
+					alert("중복된 사용자 이름입니다.");
 					return;
 				}
 				
@@ -239,17 +299,13 @@
 					param["weight"] = weight;
 				}
 				
-				alert(name + userName + phoneNumber + email + password + address + sex + height + weight);
-				
-				
-				
 				$.ajax({ 
 					type:"post"
 					, url:"/user/signup"
 					, data:param
 					, success:function(data) {
 						if(data.result == "success") {
-							location.href = "/user/signin/view"
+							location.href = "/user/signin/view";
 						} else {
 							alert("회원가입 실패");
 						}

@@ -25,53 +25,94 @@
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
 		
 		<%-- 로그인 전체 --%>
-		<div class="container-fluid row justify-content-center align-items-center mt-4">
-			<div class="sign-up">
-				<h1 class="text-center">로그인</h1>
-				
-				<%-- 사용자 이름 또는 이메일 --%>
-				<input type="text" placeholder="사용자 이름 또는 이메일" class="form-control btn-light outline my-4">
-				<%-- 사용자 이름 또는 이메일 --%>
-				
-				<%-- 비밀번호 --%>
-				<input type="password" placeholder="비밀번호" class="form-control btn-light outline my-4">
-				<%-- 비밀번호 --%>
-				
-				<button class="btn btn-dark form-control my-4">로그인</button>
-				
-				<div class="d-flex justify-content-between">
-					<div class="col-5">					
-						<hr>
-					</div>
-					<span class="col-2 text-center text-secondary">또는</span>
-					<div class="col-5">
-						<hr>
-					</div>
-				</div>
-				
-				<div class="outline rounded">
-					<div class="row justify-content-center align-items-center">
-						<span class="text-secondary font-weight-bold mt-2">계정이 없으신가요?</span>					
-					</div>
-					<div class="mt-4 pb-5">
-						<div class="bg-mint w-100 justify-content-center align-items-center d-flex z-index1">
-							<a href="#" class="text-decoration-none z-index2">						
-								<h3 class="text-primary font-weight-bold mt-1 z-index3">회원가입 하러 가기</h3>
-							</a>
+		<form id="signinForm">
+			<div class="container-fluid row justify-content-center align-items-center mt-4">
+				<div class="sign-up">
+					<h1 class="text-center">로그인</h1>
+					
+					<%-- 사용자 이름 또는 이메일 --%>
+					<input type="text" placeholder="사용자 이름 또는 이메일" class="form-control btn-light outline my-4" id="idInput">
+					<%-- 사용자 이름 또는 이메일 --%>
+					
+					<%-- 비밀번호 --%>
+					<input type="password" placeholder="비밀번호" class="form-control btn-light outline my-4" id="passwordInput">
+					<%-- 비밀번호 --%>
+					
+					<button type="submit" class="btn btn-dark form-control my-4">로그인</button>
+					
+					<div class="d-flex justify-content-between">
+						<div class="col-5">					
+							<hr>
+						</div>
+						<span class="col-2 text-center text-secondary">또는</span>
+						<div class="col-5">
+							<hr>
 						</div>
 					</div>
 					
-				
+					<div class="outline rounded">
+						<div class="row justify-content-center align-items-center">
+							<span class="text-secondary font-weight-bold mt-2">계정이 없으신가요?</span>					
+						</div>
+						<div class="mt-4 pb-5">
+							<div class="bg-mint w-100 justify-content-center align-items-center d-flex z-index1">
+								<a href="#" class="text-decoration-none z-index2">						
+									<h3 class="text-primary font-weight-bold mt-1 z-index3">회원가입 하러 가기</h3>
+								</a>
+							</div>
+						</div>
+						
+					
+					</div>
+					
 				</div>
-				
+				<footer>
+					<span></span>
+				</footer>
 			</div>
-			<footer>
-				<span></span>
-			</footer>
-		</div>
-		<%-- 회원가입 전체 --%>
-			
+			<%-- 로그인 전체 --%>
+		</form>	
 	</div>
+	
+	<script>
+		$(document).ready(function() {
+			
+			$("#signinForm").on("submit", function(e) {
+				e.preventDefault();
+				
+				let id = $("#idInput").val();
+				let password = $("#passwordInput").val();
+				
+				if(id == "") {
+					alert("사용자 이름 또는 이메일을 입력하세요.");
+					return;
+				}
+				
+				if(password == "") {
+					alert("비밀번호를 입력하세요.");
+					return;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/user/signin"
+					, data:{"id":id, "password":password}
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href = "/exus/main/view";
+						} else {
+							alert("로그인 실패");
+						}
+					}
+					, error:function() {
+						alert("로그인 에러");
+					}
+				});
+			});
+			
+		});
+	
+	</script>
 	
 </body>
 </html>

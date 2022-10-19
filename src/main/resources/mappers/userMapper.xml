@@ -35,4 +35,34 @@
 			, now()
 		)
 	</insert>
+	
+	<select id="selectCountuserName" parameterType="string" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			`user`
+		WHERE 
+			`userName` = #{userName}
+	</select>
+	
+	<select id="selectUser" parameterType="map" resultType="com.soyaa.exus.user.model.User">
+		SELECT 
+			`id`
+			, `name`
+			, `userName`
+			, `phoneNumber`
+			, `email`
+			, `password`
+			, `address`
+			, `sex`
+			, `height`
+			, `weight`
+			, `createdAt`
+			, `updatedAt`
+		FROM
+			`user`
+		WHERE
+			`password` = #{password}
+			AND (`userName` = #{userName} OR `email` = #{email})
+	</select>
 </mapper>
