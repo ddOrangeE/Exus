@@ -7,3 +7,13 @@
 .heart-icon {
 	margin-top: 20px;
 }
+
+.updateUser {
+	background-color: #e2e2e2;
+	width: 100px;
+	height: 35px;
+	border: 2px solid  #ffffff;
+	border-radius: 2em;
+	margin-right: 135px;
+}
+
