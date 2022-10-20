@@ -82,20 +82,22 @@
 				<input type="password" placeholder="비밀번호 확인" class="form-control btn-light outline mt-3 mb-4" id="passwordConfirmInput">
 				<%-- 비밀번호 --%>
 				
+				
 				<%-- 주소 --%>
 				<span class="text-secondary font-weight-bold">내 동네 위치 설정하기</span>
 				<div class="d-flex justify-content-between mt-2 mb-4">
-					<input type="text" class="form-control col-3 btn-light outline" id="siInput">
-					<span class="text-dark font-weight-bold mt-1 mr-4 ml-1">시</span>
-					<input type="text" class="form-control col-3 btn-light outline ml-2" id="guInput">
-					<span class="text-dark font-weight-bold mt-1 mr-4 ml-1">구</span>
-					<input type="text" class="form-control col-3 btn-light outline ml-2" id="dongInput">
-					<span class="text-dark font-weight-bold mt-1 mr-4 ml-1">동</span>
+					<input type="text" class="form-control btn-light outline" id="addressInput" disabled/>
+					<button type="button" class="btn btn-dark ml-1" id="addressBtn">주소검색</button>
+					<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 				</div>
+				
+				<iframe src="#" width="100%" height="500" id="iframeMap" class="d-none"></iframe>
+				<small class="text-success d-none" id="addressSuccess">함께 운동할 우리 동네 위치입니다<i class="bi bi-emoji-smile"></i></small>
+				
 				<%-- 주소 --%>
 				
 				<%-- 성별 --%>
-				<div class="mb-4">
+				<div class="my-4">
 				<span class="text-secondary font-weight-bold mr-5">성별</span>
 				<small class="mx-5"><input type="radio" name="chk_sex" value="man">남성</small>
 				<small class="ml-5"><input type="radio" name="chk_sex" value="woman">여성</small>
@@ -124,6 +126,39 @@
 	
 	<script>
 		$(document).ready(function() {
+			
+			
+			var address = null;
+			$("#addressBtn").on("click", function() {
+			    new daum.Postcode({
+			        oncomplete: function(data) {
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+			            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+			        
+			        	// 도/시
+			        	var sido = data.sido;
+			            
+			            // 시/군/구
+			            var sigungu = data.sigungu;
+			            
+			            // 법정동/법정리
+			            var bname = data.bname;
+			            
+			            address = sido + " " + sigungu + " " + bname;
+			            
+			            $("#addressInput").val(data.address);	
+			            
+			            let addressUrl = "https://m.map.kakao.com/actions/searchView?q=" + address + "&vip=true";
+			            
+			            $("#iframeMap").attr("src", addressUrl);
+			            $("#iframeMap").removeClass("d-none");
+			            $("#addressSuccess").removeClass("d-none");
+			        
+			        }
+			    }).open();
+
+			});
+		
 			
 			var isDuplicateCheck = false;
 			var isDuplicate = true;
@@ -203,7 +238,6 @@
 				let email = $("#emailInput").val() + "@" + domain;
 				let password = $("#passwordInput").val();
 				let passwordConfirm = $("#passwordConfirmInput").val();
-				let address = $("#siInput").val() + "시 " + $("#guInput").val() + "구 " + $("#dongInput").val() + "동";
 				let sex = $("input[name=chk_sex]:checked").val();
 				let height = $("#heightInput").val();
 				let weight = $("#weightInput").val();
@@ -271,11 +305,8 @@
 					return;
 				}
 				
-				if($("#siInput").val() == "" ||
-						$("#guInput").val() == "" ||
-								$("#dongInput").val() == "") {
-					alert("주소를 확인해주세요.");
-					return;
+				if($("#addressInput").val() == "") {
+					alert("주소검색을 완료해주세요.");
 				}
 				
 				if(!$("input:radio[name=chk_sex]").is(":checked")) {

@@ -3,11 +3,11 @@
 
 		<header>
 			<div class="d-flex">			
-				<div class="d-flex col-6 align-items-center">
 					<a href="#" class="text-decoration-none">
 						<h1 class="text-white font-weight-bold pt-1 ml-2">Exus</h1>
 					</a>
-					<h5 class="text-secondary font-weight-bold ml-4 mt-3 d-none">나의 운동기록</h5>
+				<div class="d-flex col-6 align-items-center">
+					<h5 class="text-secondary font-weight-bold ml-2 mt-3">나의 운동기록</h5>
 				</div>	
 				
 				<div class="d-flex justify-content-end col-6">
