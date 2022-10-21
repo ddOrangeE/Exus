@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>${userName }님의 메인</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	     
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	
@@ -23,18 +23,98 @@
 <body>
 	<div id="wrap">
 		<c:import url="/WEB-INF/jsp/include/sign_header.jsp" />
-		<nav class="menu"></nav>
-		<div></div>
+		
+		<div class="d-flex">
+			<c:import url="/WEB-INF/jsp/include/sidebar.jsp" />
+			
+			<div class="main">
+				<!-- 랭킹 -->
+				<div class="d-flex justify-content-center">
+					<div class="ranking mt-5">
+						
+						<div>
+							<h4 class="text-secondary mt-2 ml-3 font-weight-bold">Ranking</h4>
+						</div>
+						
+						<div class="d-flex justify-content-between mx-3">				
+							<div class="rankingCount"></div>
+							<div class="rankingCount"></div>
+							<div class="rankingCount"></div>
+						</div>
+						
+						<div class="d-flex justify-content-end mt-1 mr-3">
+							<a href="#" class="small">Ranking Heart 보러가기</a>				
+						</div>
+					
+					</div>
+				
+				</div>
+				<!-- 랭킹 -->
+				
+				<!-- 인기글 / 날씨 -->
+				<div class="d-flex justify-content-center mt-2">
+					<div class="d-flex justify-content-between section2">
+						<div class="popular-contents mr-2">
+							<div>
+								<h4 class="text-secondary mt-2 ml-3 font-weight-bold">우리 동네 인기글</h4>
+							</div>
+							
+							<div class="d-flex justify-content-between mx-3">
+								<div class="contents"></div>
+								<div class="contents"></div>
+								<div class="contents"></div>
+							</div>
+							
+							<div class="d-flex justify-content-between mx-3 mt-4">
+								<div class="contents"></div>
+								<div class="contents"></div>
+								<div class="contents"></div>
+							</div>
+						</div>
+						
+						<div class="weather">
+						
+						</div>
+					</div>		
+				</div>
+				<!-- 인기글 / 날씨 -->
+				
+				<!-- 운동기록 / 오늘의 미션 -->
+				<div class="d-flex justify-content-center mt-2">
+					<div class="d-flex justify-content-between section2">
+						<div class="exercise-record mr-2 mb-5"></div>
+						<div class="mission"></div>			
+					</div>
+				</div>
+				<!-- 운동기록 / 오늘의 미션 -->
+				
+		</div>
+		</div>
+		
 
 
 		
-	</div>
+	</div>	
+
 
 </body>
 
 <script>
 
 	$(document).ready(function() {
+		
+		var sideBar = false;
+		$("#sideBarIcon").on("click", function() {
+			if(!sideBar) {
+				$(".sidebar-all").removeClass("d-none");
+				sideBar = true;
+			} else {
+				$(".sidebar-all").addClass("d-none");
+				sideBar = false;
+			}
+			
+		});
+		
 		
 		var updateBtnResult = false;
 		

@@ -17,3 +17,77 @@
 	margin-right: 135px;
 }
 
+.sidebar-all {
+	width: 20%;
+}
+
+#sidebar {
+	width: 100%;
+	background-color: #e2e2e2;
+	padding-left: 10px;
+	padding-bottom: 50px; 
+}
+
+.small-menu {
+	font-size: 14px;
+	color: #838383;
+	margin-left: 20px;
+}
+
+.main {
+	width: 100%;
+}
+
+.ranking {
+	width: 80%;
+	height: 250px;
+	background-color: #f8f8f8;
+	border: 1px solid  #080808;
+	
+}
+
+.rankingCount {
+	width: 32%;
+	height: 170px;
+	background-color: #ffffff;
+	border: 1px solid  #080808;
+}
+
+.section2 {
+	width: 80%;
+}
+
+.popular-contents {
+	width: 80%;
+	height: 600px;
+	background-color: #f8f8f8;
+	border: 1px solid  #080808;
+}
+
+.contents {
+	width: 32%;
+	height: 240px;
+	background-color: #ffffff;
+	border: 1px solid  #080808;
+}
+
+.weather {
+	width: 20%;
+	height: 600px;
+	background-color: #ffffc6;
+	border: 1px solid  #080808;
+}
+
+.exercise-record {
+		width: 60%;
+	height: 600px;
+	background-color: #c8ff91;
+	border: 1px solid  #080808;
+}
+
+.mission {
+		width: 40%;
+	height: 600px;
+	background-color: #ffba99;
+	border: 1px solid  #080808;
+}

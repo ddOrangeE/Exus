@@ -6,7 +6,11 @@
 				<a href="#" class="text-decoration-none">
 					<h1 class="text-white font-weight-bold pt-1 ml-2">Exus</h1>
 				</a>
-				<div class="d-flex align-items-center col-5">
+				
+				<div class="d-flex align-items-center col-5 ml-3">
+					<a href="#" class="mt-1" id="sideBarIcon">
+					<i class="bi bi-list text-white h3"></i>
+					</a>
 					<h5 class="text-secondary font-weight-bold ml-2 mt-3">나의 운동기록</h5>
 				</div>	
 				
