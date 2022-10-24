@@ -78,15 +78,37 @@
 	border: 1px solid  #080808;
 }
 
+.weather-phrases {
+	height: 20%;
+}
+
+.weather-info {
+	height: 70%;
+	background-color: #f8f8f8;
+	border: 1px solid  #080808;
+}
+
 .exercise-record {
-		width: 60%;
+	width: 60%;
 	height: 600px;
 	background-color: #c8ff91;
 	border: 1px solid  #080808;
 }
 
+.weather-detail {
+	background-color: #00FFBF;
+	width: 80px;
+	height: 20px;
+	border: 1px solid  rgb(130, 247, 208);
+	border-radius: 2em;
+}
+
+.weather-detail-padding1 {
+	padding-top: 40px;
+}
+
 .mission {
-		width: 40%;
+	width: 40%;
 	height: 600px;
 	background-color: #ffba99;
 	border: 1px solid  #080808;

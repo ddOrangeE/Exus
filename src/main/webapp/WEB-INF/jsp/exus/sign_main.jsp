@@ -72,9 +72,113 @@
 							</div>
 						</div>
 						
+						<!-- 날씨 -->
 						<div class="weather">
+							<h5 class="text-secondary mt-2 ml-2">오늘의 우리동네 현재 <span class="text-success font-weight-bold">날씨</span>는?</h5>
+							<div class="weather-phrases m-2">
+								<h3 class="font-weight-bold">오늘은 건강하게 실내운동 추천^^</h3>
+							</div>
+							<div class="weather-info m-2">
+								
+								<!-- 온도 -->
+								<div class="pl-3 pb-2 weather-detail-padding1">
+									<div class="d-flex">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">온도</small>
+										</div>			
+										<small class="font-weight-bold ml-5">13.9°</small>					
+									</div>
+									<small class="ml-1 font-weight-bold text-info">어제보다 3.9° 낮아요 ↓</small>
+								</div>
+								
+								<!-- 체감 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">체감</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">12.8° </small>
+								</div>
+								
+								<!-- 날씨 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">날씨</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">13.9°</small>
+								</div>
+								
+								<!-- 강수량  -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">강수량</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">0mm</small>
+								</div>
+								
+								<!-- 습도 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">습도</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">28%</small>
+								</div>
+								
+								<!-- 바람 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">바람</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">(북서풍) 3.1m/s</small>
+								</div>
+								
+								<!-- 미세먼지 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">미세먼지</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">좋음</small>
+								</div>
+								
+								<!-- 초미세먼지 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">초미세먼지</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">좋음</small>
+								</div>
+								
+								<!-- 자외선 -->
+								<div class="d-flex">
+									<div class="pl-3 py-2">
+										<div class="weather-detail d-flex justify-content-center align-items-center">
+											<small class="font-weight-bold text-white">자외선</small>
+										</div>								
+									</div>
+									<small class="font-weight-bold ml-5 mt-1">보통</small>
+								</div>
+								
+							
+							</div>
+							
+							
 						
 						</div>
+						<!-- 날씨 -->
+						
 					</div>		
 				</div>
 				<!-- 인기글 / 날씨 -->
