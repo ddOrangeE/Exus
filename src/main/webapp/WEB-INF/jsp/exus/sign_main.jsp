@@ -71,7 +71,7 @@
 								<div class="contents"></div>
 							</div>
 						</div>
-						
+
 						<!-- 날씨 -->
 						<div class="weather">
 							<h5 class="text-secondary mt-2 ml-2">오늘의 우리동네 현재 <span class="text-success font-weight-bold">날씨</span>는?</h5>
@@ -86,7 +86,7 @@
 										<div class="weather-detail d-flex justify-content-center align-items-center">
 											<small class="font-weight-bold text-white">온도</small>
 										</div>			
-										<small class="font-weight-bold ml-5">13.9°</small>					
+										<small class="font-weight-bold ml-5">${weatherResult.TMP }°</small>					
 									</div>
 									<small class="ml-1 font-weight-bold text-info">어제보다 3.9° 낮아요 ↓</small>
 								</div>
@@ -108,7 +108,7 @@
 											<small class="font-weight-bold text-white">날씨</small>
 										</div>								
 									</div>
-									<small class="font-weight-bold ml-5 mt-1">13.9°</small>
+									<small class="font-weight-bold ml-5 mt-1">${weatherResult.SKY }</small>
 								</div>
 								
 								<!-- 강수량  -->
@@ -118,7 +118,7 @@
 											<small class="font-weight-bold text-white">강수량</small>
 										</div>								
 									</div>
-									<small class="font-weight-bold ml-5 mt-1">0mm</small>
+									<small class="font-weight-bold ml-5 mt-1">${weatherResult.PCP }mm</small>
 								</div>
 								
 								<!-- 습도 -->
@@ -128,7 +128,7 @@
 											<small class="font-weight-bold text-white">습도</small>
 										</div>								
 									</div>
-									<small class="font-weight-bold ml-5 mt-1">28%</small>
+									<small class="font-weight-bold ml-5 mt-1">${weatherResult.REH }%</small>
 								</div>
 								
 								<!-- 바람 -->
@@ -138,7 +138,7 @@
 											<small class="font-weight-bold text-white">바람</small>
 										</div>								
 									</div>
-									<small class="font-weight-bold ml-5 mt-1">(북서풍) 3.1m/s</small>
+									<small class="font-weight-bold ml-5 mt-1">(${weatherResult.VVV }+${weatherResult.UUU }풍) ${weather.WSD }m/s</small>
 								</div>
 								
 								<!-- 미세먼지 -->
@@ -178,6 +178,7 @@
 						
 						</div>
 						<!-- 날씨 -->
+
 						
 					</div>		
 				</div>

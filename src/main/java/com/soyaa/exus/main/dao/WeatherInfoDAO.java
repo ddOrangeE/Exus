@@ -1,10 +1,15 @@
-package com.soyaa.exus.main;
+package com.soyaa.exus.main.dao;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,11 +23,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class WeatherInfoDAO {
 
-	private String vilage_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst";
+	private String vilage_weather_url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
 	
 	private String service_key = "fmZktyC9n6LxWuvyWdn03R0h5PkDJvrTKk7Q9EA9gR8VrQr4RHKidxDp/Pgd7pjzidRjsmueKX5qzFGV6fL5xg==";
-
-	private Object restOperations;
 	
 	public Map<String, String> wetherInfo() {
 		
@@ -34,7 +37,7 @@ public class WeatherInfoDAO {
 		String base_date = formatterDate.format(today);
 		
 		// 날씨 값
-		SimpleDateFormat formatterTime = new SimpleDateFormat("HH00"); 
+		SimpleDateFormat formatterTime = new SimpleDateFormat("1700"); 
 		
 		String base_time = formatterTime.format(today);
 		
@@ -65,17 +68,52 @@ public class WeatherInfoDAO {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
-		ResponseEntity<JSONObject> response = restTemplate.exchange(
+		ResponseEntity<String> response = restTemplate.exchange(
 				urlTemplate
 				, HttpMethod.GET
 				, entity
-				, JSONObject.class
+				, String.class
 				, params);
+	
+		String string = response.getBody();
 		
-		return null;
+		Map<String, String> weatherMap = new HashMap<>();
+		
+		try {
+			JSONObject jsonObject = new JSONObject(string);
+		
+			JSONArray jsonArray = jsonObject.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+			
+			for(int i = 0; i < jsonArray.length(); i++) {
+				JSONObject obj = jsonArray.getJSONObject(i);
+				String category = obj.getString("category");
+				String fcstValue = obj.getString("fcstValue");
+				
+				weatherMap.put(category, fcstValue);
+			}
+			
+		} catch (JSONException e) {
+
+			e.printStackTrace();
+		}
 		
 		
-		
+//		//JSON Object로 body를 얻어본다...
+//		JSONObject jObj = response.getBody();
+//
+//		//JSON object의 key를 뽑아본다...
+//		Iterator keys = jObj.keys();
+//
+//		//JSON object의 key를 String 리스트에 담아버릴것이다..
+//		List<String> stringKey = new ArrayList<>();
+//
+//		//이제 이 key는 제겁니다.
+//		while(keys.hasNext()) {
+//			String key = keys.next().toString();
+//			stringKey.add(key);
+//		}
+				
+		return weatherMap;
 	}
 	
 	
