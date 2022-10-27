@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+.category-name {
+    width: 180px;
+    height: 50px;
+    background-color:gainsboro;
+}
+
+.calender {
+    width: 60%;
+    height: 600px;
+}
+
+.calender-detail {
+    width: 30%;
+    height: 600px;
+    background-color: aquamarine;
+}
+
+.exercise-detail {
+	width: 100%;
+	height: 30px;
+	background-color: #f4f4f4;
+}

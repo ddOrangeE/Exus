@@ -22,13 +22,13 @@ public class MainBO {
 		// - 하늘상태(SKY) 코드 : 맑음(1), 구름많음(3), 흐림(4)
 		
 		if(weatherMap.get("SKY") == "1") {
-			weatherMap.replace("SKY", "맑음");
+			weatherResult.put("SKY", "맑음");
 		} else if(weatherMap.get("SKY") == "2") {
-			weatherMap.replace("SKY", "비/눈");
+			weatherResult.put("SKY", "비/눈");
 		} else if(weatherMap.get("SKY") == "3") {
-			weatherMap.replace("SKY", "구름많음");
+			weatherResult.put("SKY", "구름많음");
 		} else {
-			weatherMap.replace("SKY", "흐림");
+			weatherResult.put("SKY", "흐림");
 		}
 		
 		String PCP = weatherMap.get("PCP");

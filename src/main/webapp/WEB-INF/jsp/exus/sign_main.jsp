@@ -16,8 +16,8 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	<link rel="stylesheet" href="/static/css/header.css" type="text/css">
-	<link rel="stylesheet" href="/static/css/user.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/sign_main.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css">
 
 </head>
 <body>
@@ -118,10 +118,11 @@
 											<small class="font-weight-bold text-white">강수량</small>
 										</div>								
 									</div>
-									<small class="font-weight-bold ml-5 mt-1">${weatherResult.PCP }mm</small>
+									<small class="font-weight-bold ml-5 mt-1">${weatherResult.PCP }</small>
 								</div>
 								
-								<!-- 습도 -->
+								
+								<!-- 습도 
 								<div class="d-flex">
 									<div class="pl-3 py-2">
 										<div class="weather-detail d-flex justify-content-center align-items-center">
@@ -129,7 +130,8 @@
 										</div>								
 									</div>
 									<small class="font-weight-bold ml-5 mt-1">${weatherResult.REH }%</small>
-								</div>
+								</div> -->
+
 								
 								<!-- 바람 -->
 								<div class="d-flex">
@@ -138,7 +140,7 @@
 											<small class="font-weight-bold text-white">바람</small>
 										</div>								
 									</div>
-									<small class="font-weight-bold ml-5 mt-1">(${weatherResult.VVV }+${weatherResult.UUU }풍) ${weather.WSD }m/s</small>
+									<small class="font-weight-bold ml-5 mt-1">${weatherResult.WSD }m/s</small>
 								</div>
 								
 								<!-- 미세먼지 -->

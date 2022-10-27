@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+.sidebar-all {
+	width: 350px;
+}
+
+#sidebar {
+	width: 100%;
+	background-color: #e2e2e2;
+	padding-left: 10px;
+	padding-bottom: 50px; 
+}
+
+.small-menu {
+	font-size: 14px;
+	color: #838383;
+	margin-left: 20px;
+}

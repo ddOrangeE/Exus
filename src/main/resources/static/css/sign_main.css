@@ -17,23 +17,6 @@
 	margin-right: 135px;
 }
 
-.sidebar-all {
-	width: 20%;
-}
-
-#sidebar {
-	width: 100%;
-	background-color: #e2e2e2;
-	padding-left: 10px;
-	padding-bottom: 50px; 
-}
-
-.small-menu {
-	font-size: 14px;
-	color: #838383;
-	margin-left: 20px;
-}
-
 .main {
 	width: 100%;
 }
