@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+.plan {
+	width: 550px;
+}
+
+.text-decoration-none:link {
+	text-decoration:none;
+}
+
+.outline {
+	outline: 1px solid #BDBDBD;
+}
+
+.exercise-plan {
+	background-color: #dff4ff;
+}
+
+.exercise-plan:hover {
+	background-color: #93dcff;
+}
+
+.diet {
+	background-color: #fff2d2;
+}
+
+.diet:hover {
+	background-color: #ffebbb;
+}

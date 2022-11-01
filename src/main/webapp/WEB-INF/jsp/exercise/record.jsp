@@ -38,7 +38,7 @@
 	            <div class="mt-5">
 	                <!-- 캘린더 -->
 	                <div class="category-name">
-	                    <h2 class="font-weight-bold pt-1 ml-2">캘린더</h2>        
+	                    <h2 class="font-weight-bold pt-1 ml-2">Calendar</h2>        
 	                </div>
 	                <div class="mt-5">
 	                    <div class="d-flex">
@@ -49,24 +49,24 @@
 	                        <div class="calender-detail mt-3 ml-5">
 	                        	
 	                        	<div class="col-12 mt-2">	                        	
-		                        	<h4 class="text-secondary">9/12</h4>
+		                        	<h4 class="text-white mb-3">9/12</h4>
 		                        	
-		                        	<span class="font-weight-bold">총 운동량</span>
+		                        	<span class="font-weight-bold text-white">총 운동량</span>
 		                        	<div class="exercise-detail my-1">
 		                        		<span class="ml-1">05:11:35</span>
 		                        	</div>
 		                        	
-		                        	<span class="font-weight-bold">체중</span>
+		                        	<span class="font-weight-bold text-white">체중</span>
 		                        	<div class="exercise-detail my-1">
 		                        		<span class="ml-1">54kg</span>
 		                        	</div>
 		                        	
-		                        	<span class="font-weight-bold">목표체중 까지</span>
+		                        	<span class="font-weight-bold text-white">목표체중 까지</span>
 		                        	<div class="exercise-detail my-1">
 		                        		<span class="ml-1">3.4kg</span>
 		                        	</div>
 		                        	
-		                        	<span class="font-weight-bold">오늘의 계획</span>
+		                        	<span class="font-weight-bold text-white">오늘의 계획</span>
 		                        	<div class="exercise-detail my-1">
 		                        		<span class="ml-1">달리기 30분</span>
 		                        	</div>
@@ -84,6 +84,27 @@
 	
 	                </div>
 	            </div>
+	            
+	            <!-- 오늘의 계획 -->
+                <div class="mt-5">
+                    <div class="category-name">
+                        <h2 class="font-weight-bold pt-1 ml-2">오늘의 계획</h2>        
+                    </div>
+                    <div class="bg-warning mt-5 planner">
+                        <h5 class="text-secondary pt-3 pl-2">운동기록</h5>
+                        <div class="mt-2 d-flex justify-content-center algin">
+                            <div class="plan d-flex">
+                                <span>달리기</span>
+
+
+                            </div>
+                            <div></div>
+                        </div>
+                    </div>
+
+
+                </div>
+                
 	        </div>
 		</div>
 
