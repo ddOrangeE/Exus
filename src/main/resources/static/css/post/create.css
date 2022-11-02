@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.post-create {
+    width: 800px;
+}
+
+.text-decoration-none:link {
+	text-decoration:none;
+}
+
+.introduce-font {
+	font-size: 12px;
+	resize: none;
+}
+
+.add-image {
+	background-color: #00FFBF;
+	width: 250px;
+	height: 35px;
+	border: 1px solid  rgb(130, 247, 208);
+	border-radius: 2em;
+}
