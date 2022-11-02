@@ -20,6 +20,9 @@
 	<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/plan.css" type="text/css">
 
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 
 </head>
 <body>
@@ -30,16 +33,16 @@
 			<c:import url="/WEB-INF/jsp/include/sidebar.jsp" />
 	
 	        <div class="container plan">
-				<%-- 정보수정 전체 --%>
+				<%-- 운동 전체 --%>
 				<div class="container-fluid row justify-content-center align-items-center mt-4">
 					<div class="sign-up">
 						
 						<%-- 날짜 선택 --%>
 						<div class="d-flex my-3">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">날짜 선택</span>
-							<div class="d-flex col-9 ml-2 justify-content-center align-items-center">
+							<div class="d-flex col-9 ml-2 justify-content-center align-items-center datepicker">
 								<h5 class="mr-2"><i class="bi bi-arrow-left-circle"></i></h5>
-								<input type="text" class="form-control btn-light outline text-center" value="2022-11-01" readonly>
+								<input type="text" class="form-control btn-light outline text-center" readonly id="planDate">
 								<h5 class="ml-2"><i class="bi bi-arrow-right-circle"></i></h5>
 							</div>
 						</div>
@@ -48,8 +51,8 @@
 						<%-- 운동계획 --%>			
 						<span class="text-secondary font-weight-bold col-3 my-3">운동계획</span>	
 						<div class="d-flex my-3">
-							<input type="text" placeholder="운동계획을 등록해주세요." class="form-control btn-light outline">
-							<button type="button" class="btn btn-dark ml-1">등록하기</button>
+							<input type="text" placeholder="운동계획을 등록해주세요." class="form-control btn-light outline" id="exercisePlan">
+							<button type="button" class="btn btn-dark ml-1" id="exercisePlanBtn">등록하기</button>
 						</div>
 						
 						<div class="mb-3">
@@ -118,6 +121,50 @@
 </body>
 <script>
 	$(document).ready(function() {
+		
+		$('#datepicker').datepicker('setDate', 'today');
+		
+		$("#planDate").on("click", function() {
+			
+			$('.datepicker').datepicker();
+			
+			
+		});
+		
+	  
+		// 운동 등록
+		$("#exercisePlanBtn").on("click", function() {
+			
+			let exercisePlan = $("#exercisePlan").val();
+			
+			let planDate = $("#planDate").val();
+			
+			if(exercisePlan == "") {
+				alert("운동 계획을 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"post"
+				, url:"/exercise/create"
+				, data:{"exercise":exercisePlan, "date":planDate}
+				, success:function(data) {
+					if(data.result == "success") {
+						location.reload();
+					} else {
+						alert("운동계획 등록 실패");
+					}
+				}
+				, error:function() {
+					alert("운동계획 등록 에러");
+				}
+				
+			});
+			
+		});
+		
+		
+		
 		// 사이드바
 	  	var sideBar = false;
 	  	$("#sideBarIcon").on("click", function() {

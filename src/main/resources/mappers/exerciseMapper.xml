@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.soyaa.exus.exercise.dao.ExerciseDAO">
+ 	<insert id="insertExercise" parameterType="map">
+ 		INSERT INTO
+ 			`exerciseRecord`
+ 		(
+ 			`userId`
+ 			, `exercise`
+ 			, `missionId`
+ 			, `missionTime`
+ 			, `date`
+ 			, `didOrNot`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{exercise}
+ 			, #{missionId}
+ 			, #{missionTime}
+ 			, #{date}
+ 			, #{didOrNot}
+ 			, now()
+ 			, now()
+ 		)
+ 	</insert>
+ 
+ </mapper>
