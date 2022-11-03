@@ -20,5 +20,10 @@ public class ExerciseBO {
 		
 		return exerciseDAO.insertExercise(userId, exercise, missionId, missionTime, date, didOrNot);
 	}
+	
+	// 체중 기록
+	public int weightRecord(int userid, double weight, String date) {
+		return exerciseDAO.insertWeight(userid, weight, date);
+	}
 
 }

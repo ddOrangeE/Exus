@@ -29,5 +29,25 @@
  			, now()
  		)
  	</insert>
+ 	
+ 	<insert id="insertWeight" parameterType="map">
+ 		INSERT INTO
+ 			`weight`
+ 		(
+ 			`userId`
+ 			, `weight`
+ 			, `date`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+		(
+ 			#{userId}
+ 			, #{weight}
+ 			, #{date}
+ 			, now()
+ 			, now()
+ 		)
+ 	</insert>
  
  </mapper>

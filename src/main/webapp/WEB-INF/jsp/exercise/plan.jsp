@@ -71,8 +71,10 @@
 						<div class="d-flex my-3">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">현재 체중</span>
 							<div class="d-flex col-9 ml-2 justify-content-start align-items-center">
-								<input type="text" class="form-control btn-light outline text-center col-3">
+								<input type="text" class="form-control btn-light outline text-center col-3" id="weight">
 								<h5 class="ml-1">kg</h5>
+								<button type="button" class="btn btn-dark ml-5" id="weightAddBtn">등록하기</button>
+								<button type="button" class="btn btn-secondary ml-1">수정하기</button>
 							</div>
 						</div>
 						<%-- 현재 체중 --%>
@@ -119,7 +121,7 @@
 
 </body>
 <script>
-	$(document).ready(function() {
+	$(document).ready(function() {			
 		
 		$.datepicker.setDefaults({
 		      closeText: "닫기",
@@ -149,61 +151,42 @@
 		    
 		    $('.datepicker').datepicker('setDate', 'today');
 		
+	
 		/*
-		$("#datepicker").datepicker({
-			dateFormat: 'yy-mm-dd' //달력 날짜 형태
-			,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-		    ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-		    ,changeYear: true //option값 년 선택 가능
-		    ,changeMonth: true //option값  월 선택 가능                
-		    //,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-		    //,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-		    //,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
-		    //,buttonText: "선택" //버튼 호버 텍스트              
-		    ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
-		    ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
-		    ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
-		    ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
-		    ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-		    ,minDate: "-0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		$("#weightAddBtn").on("click", function() {
 			
-		});
-		
-		$('#datepicker').datepicker('setDate', 'today');
-		
-		
-	       $("#datepicker").datepicker({
-	           dateFormat: 'yy-mm-dd' //달력 날짜 형태
-	           ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-	           ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-	           ,changeYear: true //option값 년 선택 가능
-	           ,changeMonth: true //option값  월 선택 가능                
-	           ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
-	           ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-	           ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
-	           ,buttonText: "선택" //버튼 호버 텍스트              
-	           ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
-	           ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
-	           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
-	           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
-	           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-	           ,minDate: "-0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-	       });                    
-	       
-		
-		$("#planDate").on("click", function() {
+			let weight = $("#weight").val();
 			
-			$('.datepicker').datepicker();
+			let planDate = $(".datepicker").val();
 			
-		});
-		*/
-	  
-		// 운동 등록
+			if(weight == "") {
+				alert("체중을 입력해주세요.");
+				return
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/weight_record"
+				, data:{"weight":weight, "date":planDate}
+				, success:function(data) {
+					if(data.result == "success") {
+						location.reload();
+					} else {
+						alert("체중 등록 실패");
+					}
+				}
+				, error:function() {
+					alert("체중 등록 에러");
+				}
+				
+			});
+	  */
+
 		$("#exercisePlanBtn").on("click", function() {
 			
 			let exercisePlan = $("#exercisePlan").val();
 			
-			let planDate = $("#planDate").val();
+			let planDate = $(".datepicker").val();
 			
 			if(exercisePlan == "") {
 				alert("운동 계획을 입력해주세요.");
