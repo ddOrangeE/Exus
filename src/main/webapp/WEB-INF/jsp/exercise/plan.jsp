@@ -16,13 +16,14 @@
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 	
+	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
 	<link rel="stylesheet" href="/static/css/header.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/sidebar.css" type="text/css">
 	<link rel="stylesheet" href="/static/css/plan.css" type="text/css">
-
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	<link rel="stylesheet" href="/static/css/datepicker.css" type="text/css">
 
 </head>
 <body>
@@ -40,10 +41,8 @@
 						<%-- 날짜 선택 --%>
 						<div class="d-flex my-3">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">날짜 선택</span>
-							<div class="d-flex col-9 ml-2 justify-content-center align-items-center datepicker">
-								<h5 class="mr-2"><i class="bi bi-arrow-left-circle"></i></h5>
-								<input type="text" class="form-control btn-light outline text-center" readonly id="planDate">
-								<h5 class="ml-2"><i class="bi bi-arrow-right-circle"></i></h5>
+							<div class="d-flex col-9 ml-2 justify-content-center align-items-center">
+								<input type="text" class="form-control btn-light outline text-center datepicker" readonly>
 							</div>
 						</div>
 						<%-- 날짜 선택 --%>
@@ -122,15 +121,82 @@
 <script>
 	$(document).ready(function() {
 		
+		$.datepicker.setDefaults({
+		      closeText: "닫기",
+		      prevText: "이전달",
+		      nextText: "다음달",
+		      currentText: "오늘",
+		      monthNames: ["1월", "2월", "3월", "4월", "5월", "6월",
+		        "7월", "8월", "9월", "10월", "11월", "12월"
+		      ],
+		      monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월",
+		        "7월", "8월", "9월", "10월", "11월", "12월"
+		      ],
+		      dayNames: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"],
+		      dayNamesShort: ["일", "월", "화", "수", "목", "금", "토"],
+		      dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+		      weekHeader: "주",
+		      dateFormat: "yy-mm-dd", // 날짜형태 예)yy년 m월 d일
+		      firstDay: 0,
+		      isRTL: false,
+		      showMonthAfterYear: true,
+		      yearSuffix: "년"
+		    })
+
+		    $(".datepicker").datepicker({
+		      minDate: 0
+		    })
+		    
+		    $('.datepicker').datepicker('setDate', 'today');
+		
+		/*
+		$("#datepicker").datepicker({
+			dateFormat: 'yy-mm-dd' //달력 날짜 형태
+			,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+		    ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+		    ,changeYear: true //option값 년 선택 가능
+		    ,changeMonth: true //option값  월 선택 가능                
+		    //,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+		    //,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+		    //,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+		    //,buttonText: "선택" //버튼 호버 텍스트              
+		    ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+		    ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+		    ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+		    ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+		    ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+		    ,minDate: "-0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+			
+		});
+		
 		$('#datepicker').datepicker('setDate', 'today');
+		
+		
+	       $("#datepicker").datepicker({
+	           dateFormat: 'yy-mm-dd' //달력 날짜 형태
+	           ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+	           ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+	           ,changeYear: true //option값 년 선택 가능
+	           ,changeMonth: true //option값  월 선택 가능                
+	           ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+	           ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+	           ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+	           ,buttonText: "선택" //버튼 호버 텍스트              
+	           ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+	           ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+	           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+	           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+	           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+	           ,minDate: "-0D" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+	       });                    
+	       
 		
 		$("#planDate").on("click", function() {
 			
 			$('.datepicker').datepicker();
 			
-			
 		});
-		
+		*/
 	  
 		// 운동 등록
 		$("#exercisePlanBtn").on("click", function() {
