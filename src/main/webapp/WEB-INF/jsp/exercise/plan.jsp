@@ -133,7 +133,13 @@
 			}
 			
 			$('.datepicker').datepicker('setDate', date);
-			location.href="/exercise/plan/view?date=" + date;
+			//location.href="/exercise/plan/view?date=" + date;
+			//location.replace("/exercise/plan/view?date=" + date); 
+			
+			$('.datepicker').datepicker('setDate', date);
+			
+			location.reload();
+			//$(".datepicker").val(date);
 			
 		});
 		
