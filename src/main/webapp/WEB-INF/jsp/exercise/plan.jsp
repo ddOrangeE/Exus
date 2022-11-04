@@ -42,7 +42,7 @@
 						<div class="d-flex my-3">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">날짜 선택</span>
 							<div class="d-flex col-9 ml-2 justify-content-center align-items-center">
-								<input type="text" class="form-control btn-light outline text-center datepicker" readonly>
+								<input type="text" class="form-control btn-light outline text-center datepicker inp" readonly>
 							</div>
 						</div>
 						<%-- 날짜 선택 --%>
@@ -178,7 +178,9 @@
 				
 			});
 	  
-
+		});
+		
+		// 운동기록
 		$("#exercisePlanBtn").on("click", function() {
 			
 			let exercisePlan = $("#exercisePlan").val();
