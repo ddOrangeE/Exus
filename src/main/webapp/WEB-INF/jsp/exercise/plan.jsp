@@ -123,7 +123,7 @@
 <script>
 	$(document).ready(function() {			
 		
-		$.datepicker.setDefaults({
+		$(".datepicker").datepicker({
 		      closeText: "닫기",
 		      prevText: "이전달",
 		      nextText: "다음달",
@@ -142,17 +142,14 @@
 		      firstDay: 0,
 		      isRTL: false,
 		      showMonthAfterYear: true,
-		      yearSuffix: "년"
-		    })
-
-		    $(".datepicker").datepicker({
+		      yearSuffix: "년",
 		      minDate: 0
-		    })
+		    });
 		    
 		    $('.datepicker').datepicker('setDate', 'today');
 		
 	
-		/*
+		
 		$("#weightAddBtn").on("click", function() {
 			
 			let weight = $("#weight").val();
@@ -180,7 +177,7 @@
 				}
 				
 			});
-	  */
+	  
 
 		$("#exercisePlanBtn").on("click", function() {
 			
