@@ -74,5 +74,30 @@ public class ExerciseRestController {
 		return result;
 	}
 	
+	// 식단 등록
+	@GetMapping("/diet_record")
+	public Map<String, String> dietRecord(
+			@RequestParam("diet") String diet
+			, @RequestParam(value="calorie", required=false) Double calorie
+			, @RequestParam("date") String date
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.dietRecord(userId, diet, calorie, date);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
+	
 
 }

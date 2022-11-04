@@ -55,15 +55,13 @@
 						</div>
 						
 						<div class="mb-3">
+							<c:forEach var="exerciseRecord" items="${exerciseRecordList }">
 							<div class="d-flex">
-								<input type="text" class="form-control btn-light outline my-1 exercise-plan" value="달리기">
-								<button type="button" class="btn btn-secondary ml-1 my-1">수정하기</button>								
+								<input type="text" class="form-control btn-light outline my-1 exercise-plan" value="${exerciseRecord.exercise }">
+								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
+								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>								
 							</div>
-							
-							<div class="d-flex">
-								<input type="text" class="form-control btn-light outline my-1 exercise-plan" value="필라테스 1시간">
-								<button type="button" class="btn btn-secondary ml-1 my-1">수정하기</button>
-							</div>
+							</c:forEach>
 						</div>
 						<%-- 운동계획 --%>
 						
@@ -73,8 +71,9 @@
 							<div class="d-flex col-9 ml-2 justify-content-start align-items-center">
 								<input type="text" class="form-control btn-light outline text-center col-3" id="weight">
 								<h5 class="ml-1">kg</h5>
-								<button type="button" class="btn btn-dark ml-5" id="weightAddBtn">등록하기</button>
-								<button type="button" class="btn btn-secondary ml-1">수정하기</button>
+								<button type="button" class="btn btn-dark ml-5 mr-2" id="weightAddBtn">등록</button>
+								<button type="button" class="btn btn-sm ml-4 update-btn">수정</button>
+								<button type="button" class="btn btn-sm ml-1 delete-btn">삭제</button>
 							</div>
 						</div>
 						<%-- 현재 체중 --%>
@@ -82,22 +81,22 @@
 						<%-- 오늘의 식단 --%>
 						<span class="text-secondary font-weight-bold col-3 my-3">오늘의 식단</span>	
 						<div class="d-flex my-3 justify-content-between">
-							<input type="text" class="form-control btn-light outline col-5">
-							<input type="text" class="form-control btn-light outline col-3 mr-5">
-							<button type="button" class="btn btn-dark ml-1">등록하기</button>
+							<input type="text" class="form-control btn-light outline col-5" id="dietInput">
+							<input type="text" class="form-control btn-light outline col-3 mr-5" id="calorieInput">
+							<button type="button" class="btn btn-dark ml-1" id="dietRecordBtn">등록하기</button>
 						</div>
 						
 						<div class="mb-3">
 							<div class="d-flex justify-content-between my-1">
-								<input type="text" class="form-control btn-light outline col-5 diet">
-								<input type="text" class="form-control btn-light outline col-3 mr-5 diet">
-								<button type="button" class="btn btn-secondary ml-1">수정하기</button>
+								<input type="text" class="form-control btn-light outline my-1 diet" value="치킨 1100kcal">
+								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
+								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>
 							</div>
 							
 							<div class="d-flex justify-content-between my-1">
-								<input type="text" class="form-control btn-light outline col-5 my-1 diet">
-								<input type="text" class="form-control btn-light outline col-3 mr-5 my-1 diet">
-								<button type="button" class="btn btn-secondary ml-1 my-1">수정하기</button>
+								<input type="text" class="form-control btn-light outline my-1 diet" value="치킨 1100kcal">
+								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
+								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>
 							</div>
 							
 							
@@ -123,6 +122,54 @@
 <script>
 	$(document).ready(function() {			
 		
+		
+		$(".datepicker").on("change", function() {
+			
+			let date = $(".datepicker").val();
+			
+			if(date == "") {
+				alert("날짜를 선택해주세요.");
+				return;
+			}
+			
+			$('.datepicker').datepicker('setDate', date);
+			location.href="/exercise/plan/view?date=" + date;
+			
+		});
+		
+		
+		$("#dietRecordBtn").on("click", function() {
+			
+			let diet = $("#dietInput").val();
+			let calorie = $("#calorieInput").val();
+			let date = $(".datepicker").val();
+			
+			if(diet == "") {
+				alert("식단을 입력해주세요.");
+				return;
+			}
+			
+			if(calorie == "") {
+				alert("칼로리 없이 등록하시겠습니까?");
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/diet_record"
+				, data:{"diet":diet, "calorie":calorie, "date":date}
+				, success:function(data) {
+					if(data.result == "success") {
+						location.reload();
+					} else {
+						alert("식단 등록 실패");
+					}
+				}
+				, error:function() {
+					alert("식단 기록 에러");
+				}
+			});
+		});
+		
 		$(".datepicker").datepicker({
 		      closeText: "닫기",
 		      prevText: "이전달",
@@ -143,13 +190,11 @@
 		      isRTL: false,
 		      showMonthAfterYear: true,
 		      yearSuffix: "년",
-		      minDate: 0
+		      //minDate: 0
 		    });
 		    
 		    $('.datepicker').datepicker('setDate', 'today');
-		
 	
-		
 		$("#weightAddBtn").on("click", function() {
 			
 			let weight = $("#weight").val();

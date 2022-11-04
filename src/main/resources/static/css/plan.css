@@ -12,6 +12,22 @@
 	outline: 1px solid #BDBDBD;
 }
 
+.update-btn {
+	background-color: #ffffd0;
+}
+
+.delete-btn {
+	background-color: #ffd2d2;
+}
+
+.update-btn:hover {
+	background-color: #ffff8a;
+}
+
+.delete-btn:hover {
+	background-color: #ffb0b0;
+}
+
 .exercise-plan {
 	background-color: #dff4ff;
 }

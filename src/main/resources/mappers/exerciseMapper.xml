@@ -49,5 +49,44 @@
  			, now()
  		)
  	</insert>
- 
+ 	
+ 	<insert id="insertDiet" parameterType="map">
+ 		INSERT INTO 
+ 			`diet`
+ 		(
+ 			`userId`
+ 			, `date`
+ 			, `diet`
+ 			, `calorie`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{date}
+ 			, #{diet}
+ 			, #{calorie}
+ 			, now()
+ 			, now()
+ 		)
+ 	</insert>
+ 	
+ 	<select id="selectExercise" parameterType="map" resultType="com.soyaa.exus.exercise.model.ExerciseRecord">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `missionId`
+ 			, `missionTime`
+ 			, `date`
+ 			, `exercise`
+ 			, `exerciseTime`
+ 			, `didOrNot`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`exerciseRecord`
+ 		WHERE
+ 			`userId` = #{userId} AND `date` = #{date}
+ 	</select>
  </mapper>
