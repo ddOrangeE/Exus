@@ -36,7 +36,7 @@ public class ExerciseRestController {
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = exerciseBO.addExercise(userId, exercise, userId, missionTime, date);
+		int count = exerciseBO.addExercise(userId, exercise, missionId, missionTime, date);
 		
 		Map<String, String> result = new HashMap<>();
 		
@@ -48,6 +48,32 @@ public class ExerciseRestController {
 		
 		return result;
 		
+	}
+	
+	// 운동계획 수정
+	@PostMapping("/update")
+	public Map<String, String> updateExercisePlan(
+			@RequestParam("exerciseId") int exerciseId
+			, @RequestParam("exercise") String exercise
+			, @RequestParam(value="missionId", required=false) Integer missionId
+			, @RequestParam(value="missionTime", required=false) Date missionTime
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.updateExercisePlan(userId, exerciseId, exercise, missionId, missionTime);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
 	}
 	
 	// 체중 등록
@@ -98,6 +124,8 @@ public class ExerciseRestController {
 		
 		return result;
 	}
+	
+	
 	
 
 }

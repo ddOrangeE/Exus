@@ -6,7 +6,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.soyaa.exus.exercise.model.Diet;
 import com.soyaa.exus.exercise.model.ExerciseRecord;
+import com.soyaa.exus.exercise.model.Weight;
 
 @Repository
 public interface ExerciseDAO {
@@ -19,6 +21,14 @@ public interface ExerciseDAO {
 			, @Param("missionTime") Date missionTime
 			, @Param("date") String date
 			, @Param("didOrNot") int didOrNot);
+	
+	// 운동계획 수정
+	public int updateExercisePlan(
+			@Param("exerciseId") int exerciseId
+			, @Param("exercise") String exercise
+			, @Param("missionId") Integer missionId
+			, @Param("missionTime") Date missionTime);
+	
 	
 	// 체중 기록
 	public int insertWeight(
@@ -37,4 +47,15 @@ public interface ExerciseDAO {
 	public List<ExerciseRecord> selectExercise(
 			@Param("userId") int userId
 			, @Param("date") String date);
+
+	// 체중조회
+	public Weight selectWeight(
+			@Param("userId") int userId
+			, @Param("date") String date);
+	
+	// 식단조회
+	public List<Diet> selectDiet(
+			@Param("userId") int userId
+			, @Param("date") String date);
+	
 }

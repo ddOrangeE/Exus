@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.soyaa.exus.exercise.dao.ExerciseDAO;
+import com.soyaa.exus.exercise.model.Diet;
 import com.soyaa.exus.exercise.model.ExerciseRecord;
+import com.soyaa.exus.exercise.model.Weight;
 
 @Service
 public class ExerciseBO {
@@ -22,6 +24,13 @@ public class ExerciseBO {
 		int didOrNot = 0;
 		
 		return exerciseDAO.insertExercise(userId, exercise, missionId, missionTime, date, didOrNot);
+	}
+	
+	// 운동기록 수정
+	public int updateExercisePlan(int userId, int exerciseId, String exercise, Integer missionId, Date missionTime) {
+		
+		return exerciseDAO.updateExercisePlan(exerciseId, exercise, missionId, missionTime);
+		
 	}
 	
 	// 체중 기록
@@ -46,6 +55,36 @@ public class ExerciseBO {
 		}
 		
 		return exerciseDAO.selectExercise(userId, date);
+	}
+	
+	
+	// 체중조회
+	public Weight getWeight(int userId, String date) {
+		
+		Date now = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(now);
+		
+		if(date == null) {
+			date = today;
+		}
+		
+		return exerciseDAO.selectWeight(userId, date);
+		
+	}
+	
+	// 식단조회
+	public List<Diet> getDietList(int userId, String date) {
+		
+		Date now = new Date();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String today = formatter.format(now);
+		
+		if(date == null) {
+			date = today;
+		}
+		
+		return exerciseDAO.selectDiet(userId, date);
 	}
 	
 }

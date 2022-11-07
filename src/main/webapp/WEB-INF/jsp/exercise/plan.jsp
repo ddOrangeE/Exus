@@ -42,7 +42,7 @@
 						<div class="d-flex my-3">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">날짜 선택</span>
 							<div class="d-flex col-9 ml-2 justify-content-center align-items-center">
-								<input type="text" class="form-control btn-light outline text-center datepicker inp" readonly>
+								<input type="text" class="form-control btn-light outline text-center datepicker inp" value="${date }" readonly>
 							</div>
 						</div>
 						<%-- 날짜 선택 --%>
@@ -57,8 +57,8 @@
 						<div class="mb-3">
 							<c:forEach var="exerciseRecord" items="${exerciseRecordList }">
 							<div class="d-flex">
-								<input type="text" class="form-control btn-light outline my-1 exercise-plan" value="${exerciseRecord.exercise }">
-								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
+								<input type="text" class="form-control btn-light outline my-1 exercise-plan" id="exercisePlan${exerciseRecord.id }" value="${exerciseRecord.exercise }">
+								<button type="button" class="btn btn-sm ml-1 my-1 update-btn exerciseUpdateBtn" data-exercise-id="${exerciseRecord.id }">수정</button>
 								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>								
 							</div>
 							</c:forEach>
@@ -66,14 +66,25 @@
 						<%-- 운동계획 --%>
 						
 						<%-- 현재 체중 --%>
-						<div class="d-flex my-3">				
+						<div class="d-flex my-3 weightInfo">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">현재 체중</span>
 							<div class="d-flex col-9 ml-2 justify-content-start align-items-center">
-								<input type="text" class="form-control btn-light outline text-center col-3" id="weight">
+								<input type="text" class="form-control btn-light outline text-center col-3" id="weight" value="${weight.weight }">
 								<h5 class="ml-1">kg</h5>
-								<button type="button" class="btn btn-dark ml-5 mr-2" id="weightAddBtn">등록</button>
-								<button type="button" class="btn btn-sm ml-4 update-btn">수정</button>
-								<button type="button" class="btn btn-sm ml-1 delete-btn">삭제</button>
+								
+								<div class="d-flex justify-content-end col-9">
+									<c:choose>
+										<c:when test="${empty weight.weight }">
+											<button type="button" class="btn btn-dark mr-1" id="weightAddBtn">등록</button>
+										</c:when>
+										
+										<c:otherwise>
+											<button type="button" class="btn btn-sm update-btn">수정</button>
+											<button type="button" class="btn btn-sm mx-1 delete-btn">삭제</button>
+										</c:otherwise>
+									</c:choose>								
+								</div>
+								
 							</div>
 						</div>
 						<%-- 현재 체중 --%>
@@ -87,19 +98,15 @@
 						</div>
 						
 						<div class="mb-3">
+							
+							<c:forEach var="dietList" items="${dietList }">
 							<div class="d-flex justify-content-between my-1">
-								<input type="text" class="form-control btn-light outline my-1 diet" value="치킨 1100kcal">
+								<input type="text" class="form-control btn-light outline my-1 diet" value="${dietList.diet } ${dietList.calorie }kcal">
 								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
 								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>
 							</div>
-							
-							<div class="d-flex justify-content-between my-1">
-								<input type="text" class="form-control btn-light outline my-1 diet" value="치킨 1100kcal">
-								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
-								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>
-							</div>
-							
-							
+							</c:forEach>
+
 						</div>
 						<%-- 오늘의 식단 --%>
 						
@@ -122,6 +129,7 @@
 <script>
 	$(document).ready(function() {			
 		
+		var weightInfo = false;
 		
 		$(".datepicker").on("change", function() {
 			
@@ -132,18 +140,12 @@
 				return;
 			}
 			
-			$('.datepicker').datepicker('setDate', date);
-			//location.href="/exercise/plan/view?date=" + date;
-			//location.replace("/exercise/plan/view?date=" + date); 
-			
-			$('.datepicker').datepicker('setDate', date);
-			
-			location.reload();
-			//$(".datepicker").val(date);
+			location.href="/exercise/plan/view?date=" + date;
 			
 		});
 		
 		
+		// 식단 등록
 		$("#dietRecordBtn").on("click", function() {
 			
 			let diet = $("#dietInput").val();
@@ -176,6 +178,7 @@
 			});
 		});
 		
+		// datepiker
 		$(".datepicker").datepicker({
 		      closeText: "닫기",
 		      prevText: "이전달",
@@ -199,18 +202,32 @@
 		      //minDate: 0
 		    });
 		    
-		    $('.datepicker').datepicker('setDate', 'today');
+		    //$('.datepicker').datepicker('setDate', 'today');
 	
+		// 체중등록
 		$("#weightAddBtn").on("click", function() {
 			
 			let weight = $("#weight").val();
 			
 			let planDate = $(".datepicker").val();
 			
+			let today = $.datepicker.formatDate($.datepicker.ATOM, new Date());    
+			
+			if(planDate > today) {
+				alert("체중을 등록할 수 없는 일자입니다.");
+				return;
+			}
+			
 			if(weight == "") {
 				alert("체중을 입력해주세요.");
-				return
+				return;
 			}
+			
+			if(!$.isNumeric(weight)) {
+				alert("체중을 확인해주세요.");
+				return;
+			}
+			
 			
 			$.ajax({
 				type:"get"
@@ -230,6 +247,46 @@
 			});
 	  
 		});
+		
+		
+		// 운동기록 수정
+		$(".exerciseUpdateBtn").on("click", function() {
+			
+			let date = $(".datepicker").val();
+			
+			let exerciseId = $(this).data("exercise-id");
+			
+			let exercisePlan = $("#exercisePlan" + exerciseId).val();
+			
+			
+			if(exercisePlan == "") {
+				alert("수정할 내용을 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"post"
+				, url:"/exercise/update"
+				, data:{"exercise":exercisePlan, "exerciseId":exerciseId}
+			
+				, success:function(data) {
+					if(data.result == "success") {
+						location.href="/exercise/plan/view?date=" + date;
+					} else {
+						alert("운동계획 수정 실패");
+					}
+				}
+				, error:function() {
+					alert("운동계획 수정 에러");
+				}
+			});
+			
+			
+			
+			
+		});
+		
+		
 		
 		// 운동기록
 		$("#exercisePlanBtn").on("click", function() {
