@@ -36,12 +36,23 @@ public interface ExerciseDAO {
 			, @Param("weight") double weight
 			, @Param("date") String date);
 	
+	// 체중 수정
+	public int updateWeight(
+			@Param("weight") double weight
+			, @Param("weightId") int weightId);
+	
 	// 식단 기록
 	public int insertDiet(
 			@Param("userId") int userId
 			, @Param("diet") String diet
 			, @Param("calorie") Double calorie
 			, @Param("date") String date);
+	
+	// 식단 수정
+	public int updateDiet(
+			@Param("dietId") int dietId
+			, @Param("diet") String diet
+			, @Param("calorie") Double calorie);
 	
 	// 운동계획 조회
 	public List<ExerciseRecord> selectExercise(

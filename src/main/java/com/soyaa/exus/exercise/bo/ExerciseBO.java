@@ -38,11 +38,24 @@ public class ExerciseBO {
 		return exerciseDAO.insertWeight(userid, weight, date);
 	}
 	
+	// 체중 수정
+	public int updateWeightRecord(int userId, double weight, int weightId) {
+		
+		return exerciseDAO.updateWeight(weight, weightId);
+		
+	}
+	
+	
 	// 식단 등록
 	public int dietRecord(int userId, String diet, Double calorie, String date) {
 		return exerciseDAO.insertDiet(userId, diet, calorie, date);
 	}
 
+	// 식단 수정
+	public int dietRecordUpdate(int userId, int dietId, String diet, Double calorie) {
+		return exerciseDAO.updateDiet(dietId, diet, calorie);
+	}
+	
 	// 운동기록 조회
 	public List<ExerciseRecord> getExerciseList(int userId, String date) {
 		

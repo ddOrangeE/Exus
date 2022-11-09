@@ -62,6 +62,16 @@
  		)
  	</insert>
  	
+ 	<update id="updateWeight" parameterType="map">
+ 		UPDATE 
+ 			`weight`
+ 		SET
+ 			`weight` = #{weight}
+ 			, `updatedAt` = now()
+ 		WHERE
+ 			`id` = #{weightId}
+ 	</update>
+ 	
  	<insert id="insertDiet" parameterType="map">
  		INSERT INTO 
  			`diet`
@@ -83,6 +93,17 @@
  			, now()
  		)
  	</insert>
+ 	
+ 	<update id="updateDiet" parameterType="map">
+ 		UPDATE 
+ 			`diet`
+ 		SET
+ 			`diet` = #{diet}
+ 			, `calorie` = #{calorie}
+ 			, `updatedAt` = now()
+ 		WHERE
+ 			`id` = #{dietId}
+ 	</update>
  	
  	<select id="selectExercise" parameterType="map" resultType="com.soyaa.exus.exercise.model.ExerciseRecord">
  		SELECT 

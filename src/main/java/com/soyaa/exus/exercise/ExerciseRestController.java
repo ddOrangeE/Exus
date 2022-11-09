@@ -100,6 +100,30 @@ public class ExerciseRestController {
 		return result;
 	}
 	
+	// 체중 수정
+	@GetMapping("/weight_record/update")
+	public Map<String, String> weightRecordUpdate(
+			@RequestParam("weight") double weight
+			, @RequestParam("weightId") int weightId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.updateWeightRecord(userId, weight, weightId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
+	
 	// 식단 등록
 	@GetMapping("/diet_record")
 	public Map<String, String> dietRecord(
@@ -124,6 +148,33 @@ public class ExerciseRestController {
 		
 		return result;
 	}
+	
+	// 식단 수정
+	@GetMapping("/diet_record/update")
+	public Map<String, String> dietRecordUpdate(
+			@RequestParam("dietId") int dietId
+			, @RequestParam("diet") String diet
+			, @RequestParam(value="calorie", required=false) Double calorie
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.dietRecordUpdate(userId, dietId, diet, calorie);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	
+	}
+	
 	
 	
 	

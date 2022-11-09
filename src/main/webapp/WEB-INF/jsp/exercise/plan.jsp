@@ -69,7 +69,7 @@
 						<div class="d-flex my-3 weightInfo">				
 							<span class="text-secondary font-weight-bold col-3 mt-1">현재 체중</span>
 							<div class="d-flex col-9 ml-2 justify-content-start align-items-center">
-								<input type="text" class="form-control btn-light outline text-center col-3" id="weight" value="${weight.weight }">
+								<input type="text" class="form-control btn-light outline text-center col-3" id="weight" value="${weight.weight }" data-weight-id="${weight.id }">
 								<h5 class="ml-1">kg</h5>
 								
 								<div class="d-flex justify-content-end col-9">
@@ -79,7 +79,7 @@
 										</c:when>
 										
 										<c:otherwise>
-											<button type="button" class="btn btn-sm update-btn">수정</button>
+											<button type="button" class="btn btn-sm update-btn" id="weightUpdateBtn">수정</button>
 											<button type="button" class="btn btn-sm mx-1 delete-btn">삭제</button>
 										</c:otherwise>
 									</c:choose>								
@@ -100,10 +100,13 @@
 						<div class="mb-3">
 							
 							<c:forEach var="dietList" items="${dietList }">
-							<div class="d-flex justify-content-between my-1">
-								<input type="text" class="form-control btn-light outline my-1 diet" value="${dietList.diet } ${dietList.calorie }kcal">
-								<button type="button" class="btn btn-sm ml-1 my-1 update-btn">수정</button>
-								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>
+							<div class="d-flex justify-content-between my-1 dietInput">
+								<input type="text" class="form-control btn-light outline my-1 diet dietCalorieUpdateInput" value="${dietList.diet } ${dietList.calorie }kcal" id="dietCalorieUpdateInput${dietList.id }" data-diet-id="${dietList.id }">
+								
+								<input type="text" class="form-control btn-light outline col-5 my-1 d-none dietUpdateInput dietCalorieUpdateInput" value="${dietList.diet }" id="dietUpdateInput${dietList.id }">
+								<input type="text" class="form-control btn-light outline col-3 my-1 mr-5 ml-2 d-none dietUpdateInput dietCalorieUpdateInput" value="${dietList.calorie }kcal" id="calorieUpdateInput${dietList.id }">
+								<button type="button" class="btn btn-sm ml-1 my-1 update-btn dietUpdateBtn dietCalorieUpdateInput" data-diet-id="${dietList.id }">수정</button>
+								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn dietCalorieUpdateInput">삭제</button>
 							</div>
 							</c:forEach>
 
@@ -141,6 +144,80 @@
 			}
 			
 			location.href="/exercise/plan/view?date=" + date;
+			
+		});
+
+		
+		var dietClickId = null;
+		
+		$(".dietCalorieUpdateInput").on("click", function() {
+			let dietId = $(this).data("diet-id");
+			
+			dietClickId = dietId;
+			
+			$("#dietCalorieUpdateInput" + dietId).addClass("d-none");
+			
+			$("#dietUpdateInput" + dietId).removeClass("d-none");
+			$("#calorieUpdateInput" + dietId).removeClass("d-none");
+			
+		});
+		
+		$("html").on("click", function(e) {
+			
+			if(!$(e.target).hasClass('dietCalorieUpdateInput')){
+
+				$(".dietCalorieUpdateInput").removeClass("d-none");
+				
+				$(".dietUpdateInput").addClass("d-none");
+	        }
+			
+		});
+		
+		
+		
+		
+		// 식단 수정
+		$(".dietUpdateBtn").on("click", function() {
+			
+			let date = $(".datepicker").val();
+			
+			let dietId = $(this).data("diet-id");
+			
+			let diet = $("#dietUpdateInput" + dietId).val();
+			
+			let calorie = $("#calorieUpdateInput" + dietId).val();
+			
+			
+			/*
+			수정중
+			
+			if(calorie.contains("kcal")) {
+				calorie = calorie.replace('kcal', '');
+			}
+			
+			*/
+			
+			if(diet == "") {
+				alert("수정할 식단을 입력해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/diet_record/update"
+				, data:{"diet":diet, "dietId":dietId, "calorie":calorie}
+			
+				, success:function(data) {
+					if(data.result == "success") {
+						location.href="/exercise/plan/view?date=" + date;
+					} else {
+						alert("식단 수정 실패");
+					}
+				}
+				, error:function() {
+					alert("식단 수정 에러");
+				}
+			});
 			
 		});
 		
@@ -204,6 +281,45 @@
 		    
 		    //$('.datepicker').datepicker('setDate', 'today');
 	
+		// 체중수정
+		$("#weightUpdateBtn").on("click", function() {
+			
+			let weight = $("#weight").val();
+			
+			let weightId = $("#weight").data("weight-id");
+			
+			let date = $(".datepicker").val();
+			
+			if(weight == "") {
+				alert("수정할 체중을 입력해주세요.");
+				return;
+			}
+			
+			if(!$.isNumeric(weight)) {
+				alert("체중을 확인해주세요.");
+				return;
+			}
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/weight_record/update"
+				, data:{"weight":weight, "weightId":weightId}
+				, success:function(data) {
+					if(data.result == "success") {
+						location.href="/exercise/plan/view?date=" + date;
+					} else {
+						alert("체중수정 실패");
+					}
+				}
+				, error:function() {
+					alert("체중수정 에러");
+				}
+			});
+			
+			
+		});
+		   
+		    
 		// 체중등록
 		$("#weightAddBtn").on("click", function() {
 			
