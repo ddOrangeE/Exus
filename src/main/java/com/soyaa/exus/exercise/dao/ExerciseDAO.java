@@ -29,6 +29,9 @@ public interface ExerciseDAO {
 			, @Param("missionId") Integer missionId
 			, @Param("missionTime") Date missionTime);
 	
+	// 운동계힉 삭제
+	public int deleteExercisePlan(@Param("exerciseId") int exerciseId);
+	
 	
 	// 체중 기록
 	public int insertWeight(

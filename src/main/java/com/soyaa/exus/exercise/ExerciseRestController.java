@@ -76,6 +76,30 @@ public class ExerciseRestController {
 		return result;
 	}
 	
+	// 운동계획 삭제
+	@GetMapping("/delete")
+	public Map<String, String> exerciseDelete(
+			@RequestParam("exerciseId") int exerciseId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.deleteExercise(userId, exerciseId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
+	
+	
+	
 	// 체중 등록
 	@GetMapping("/weight_record")
 	public Map<String, String> weightRecord(
@@ -123,6 +147,9 @@ public class ExerciseRestController {
 		
 		return result;
 	}
+	
+	// 체중 삭제
+	
 	
 	// 식단 등록
 	@GetMapping("/diet_record")

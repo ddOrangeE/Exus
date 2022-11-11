@@ -59,7 +59,7 @@
 							<div class="d-flex">
 								<input type="text" class="form-control btn-light outline my-1 exercise-plan" id="exercisePlan${exerciseRecord.id }" value="${exerciseRecord.exercise }">
 								<button type="button" class="btn btn-sm ml-1 my-1 update-btn exerciseUpdateBtn" data-exercise-id="${exerciseRecord.id }">수정</button>
-								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn">삭제</button>								
+								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn exerciseDeleteBtn" data-exercise-id="${exerciseRecord.id }">삭제</button>								
 							</div>
 							</c:forEach>
 						</div>
@@ -93,7 +93,7 @@
 						<span class="text-secondary font-weight-bold col-3 my-3">오늘의 식단</span>	
 						<div class="d-flex my-3 justify-content-between">
 							<input type="text" class="form-control btn-light outline col-5" id="dietInput">
-							<input type="text" class="form-control btn-light outline col-3 mr-5" id="calorieInput">
+							<input type="text" class="form-control btn-light outline col-3 mr-5" placeholder="kcal" id="calorieInput">
 							<button type="button" class="btn btn-dark ml-1" id="dietRecordBtn">등록하기</button>
 						</div>
 						
@@ -188,19 +188,22 @@
 			let calorie = $("#calorieUpdateInput" + dietId).val();
 			
 			
-			/*
-			수정중
 			
-			if(calorie.contains("kcal")) {
+			if(calorie.indexOf("kcal") != -1) {
 				calorie = calorie.replace('kcal', '');
 			}
 			
-			*/
 			
 			if(diet == "") {
 				alert("수정할 식단을 입력해주세요.");
 				return;
 			}
+			
+			if(!$.isNumeric(calorie)) {
+				alert("칼로리를 확인해주세요.");
+				return;
+			}
+
 			
 			$.ajax({
 				type:"get"
@@ -236,6 +239,11 @@
 			
 			if(calorie == "") {
 				alert("칼로리 없이 등록하시겠습니까?");
+			}
+			
+			if(!$.isNumeric(calorie)) {
+				alert("칼로리를 확인해주세요.");
+				return;
 			}
 			
 			$.ajax({
@@ -363,6 +371,34 @@
 			});
 	  
 		});
+		
+		// 운동기록 삭제
+		$(".exerciseDeleteBtn").on("click", function () {
+			
+			let exerciseId = $(this).data("exercise-id");
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/delete"
+				, data:{"exerciseId":exerciseId}
+				
+				, success:function(data) {
+					if(data.result == "success") {
+						location.reload();
+					} else {
+						alert("운동기록 삭제 실패");
+					}
+				}
+				, error:function() {
+					alert("운동기록 삭제 에러");
+				}
+				
+			});
+			
+		});
+		
+		
+		
 		
 		
 		// 운동기록 수정

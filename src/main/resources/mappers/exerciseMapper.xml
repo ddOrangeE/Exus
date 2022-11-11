@@ -42,6 +42,14 @@
  			`id` = #{exerciseId}
  	</update>
  	
+ 	<delete id="deleteExercisePlan" parameterType="int">
+ 		DELETE FROM 
+ 			`exerciseRecord`
+ 		WHERE
+ 			`id` = #{exerciseId}
+ 	</delete>
+ 	
+ 	
  	<insert id="insertWeight" parameterType="map">
  		INSERT INTO
  			`weight`

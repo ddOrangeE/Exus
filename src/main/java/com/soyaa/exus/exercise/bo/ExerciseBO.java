@@ -33,6 +33,11 @@ public class ExerciseBO {
 		
 	}
 	
+	// 운동기록 삭제
+	public int deleteExercise(int userId, int exerciseId) {
+		return exerciseDAO.deleteExercisePlan(exerciseId);
+	}
+	
 	// 체중 기록
 	public int weightRecord(int userid, double weight, String date) {
 		return exerciseDAO.insertWeight(userid, weight, date);
