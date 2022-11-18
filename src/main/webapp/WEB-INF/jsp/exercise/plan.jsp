@@ -80,7 +80,7 @@
 										
 										<c:otherwise>
 											<button type="button" class="btn btn-sm update-btn" id="weightUpdateBtn">수정</button>
-											<button type="button" class="btn btn-sm mx-1 delete-btn">삭제</button>
+											<button type="button" class="btn btn-sm mx-1 delete-btn" id="weightDeleteBtn">삭제</button>
 										</c:otherwise>
 									</c:choose>								
 								</div>
@@ -106,7 +106,7 @@
 								<input type="text" class="form-control btn-light outline col-5 my-1 d-none dietUpdateInput dietCalorieUpdateInput" value="${dietList.diet }" id="dietUpdateInput${dietList.id }">
 								<input type="text" class="form-control btn-light outline col-3 my-1 mr-5 ml-2 d-none dietUpdateInput dietCalorieUpdateInput" value="${dietList.calorie }kcal" id="calorieUpdateInput${dietList.id }">
 								<button type="button" class="btn btn-sm ml-1 my-1 update-btn dietUpdateBtn dietCalorieUpdateInput" data-diet-id="${dietList.id }">수정</button>
-								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn dietCalorieUpdateInput">삭제</button>
+								<button type="button" class="btn btn-sm ml-1 my-1 delete-btn dietDeleteBtn dietCalorieUpdateInput" data-diet-id="${dietList.id }">삭제</button>
 							</div>
 							</c:forEach>
 
@@ -174,6 +174,27 @@
 		});
 		
 		
+		// 식단 삭제
+		$(".dietDeleteBtn").on("click", function() {
+			
+			let dietId = $(this).data("diet-id");
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/diet_record/delete"
+				, data:{"dietId":dietId}
+				, success:function(data) {
+					if(data.result == "success") {
+						location.reload();
+					} else {
+						alert("식단 삭제 실패");
+					}
+				}
+				, error:function() {
+					alert("식단 삭제 에러");
+				}
+			});
+		});
 		
 		
 		// 식단 수정
@@ -289,6 +310,34 @@
 		    
 		    //$('.datepicker').datepicker('setDate', 'today');
 	
+		    
+		// 체중 삭제
+		$("#weightDeleteBtn").on("click", function() {
+			
+			let weightId = $("#weight").data("weight-id");
+			
+			$.ajax({
+				type:"get"
+				, url:"/exercise/weight_record/delete"
+				, data:{"weightId":weightId}
+				, success:function(data) {
+					if(data.result == "success") {
+						location.reload();
+					} else {
+						alert("체중 삭제 실패");
+					}
+				}
+				, error:function() {
+					alert("체중 삭제 에러");
+				}
+				
+				
+			});
+			
+		});
+		    
+		    
+		    
 		// 체중수정
 		$("#weightUpdateBtn").on("click", function() {
 			

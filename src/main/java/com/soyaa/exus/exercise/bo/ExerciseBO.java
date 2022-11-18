@@ -51,6 +51,12 @@ public class ExerciseBO {
 	}
 	
 	
+	// 체중 삭제
+	public int deleteWeightRecord(int userId, int weightId) {
+		
+		return exerciseDAO.deleteWeight(weightId);
+	}
+	
 	// 식단 등록
 	public int dietRecord(int userId, String diet, Double calorie, String date) {
 		return exerciseDAO.insertDiet(userId, diet, calorie, date);
@@ -59,6 +65,11 @@ public class ExerciseBO {
 	// 식단 수정
 	public int dietRecordUpdate(int userId, int dietId, String diet, Double calorie) {
 		return exerciseDAO.updateDiet(dietId, diet, calorie);
+	}
+	
+	// 식단 삭제
+	public int dietRecordDelete(int userId, int dietId) {
+		return exerciseDAO.deleteDiet(dietId);
 	}
 	
 	// 운동기록 조회

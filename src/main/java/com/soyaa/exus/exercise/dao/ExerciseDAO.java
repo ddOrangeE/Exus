@@ -44,6 +44,9 @@ public interface ExerciseDAO {
 			@Param("weight") double weight
 			, @Param("weightId") int weightId);
 	
+	// 체중 삭제
+	public int deleteWeight(@Param("weightId") int weightId);
+	
 	// 식단 기록
 	public int insertDiet(
 			@Param("userId") int userId
@@ -56,6 +59,9 @@ public interface ExerciseDAO {
 			@Param("dietId") int dietId
 			, @Param("diet") String diet
 			, @Param("calorie") Double calorie);
+	
+	// 식단 삭제
+	public int deleteDiet(@Param("dietId") int dietId);
 	
 	// 운동계획 조회
 	public List<ExerciseRecord> selectExercise(

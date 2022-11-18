@@ -149,6 +149,27 @@ public class ExerciseRestController {
 	}
 	
 	// 체중 삭제
+	@GetMapping("/weight_record/delete")
+	public Map<String, String> weightRecordDelete(
+			@RequestParam("weightId") int weightId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.deleteWeightRecord(userId, weightId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
+	}
 	
 	
 	// 식단 등록
@@ -200,6 +221,29 @@ public class ExerciseRestController {
 		
 		return result;
 	
+	}
+	
+	// 식단 삭제
+	@GetMapping("/diet_record/delete")
+	public Map<String, String> dietRecordDelete(
+			@RequestParam("dietId") int dietId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = exerciseBO.dietRecordDelete(userId, dietId);
+		
+		Map<String, String> result = new HashMap<>();
+		
+		if(count == 1) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
 	}
 	
 	

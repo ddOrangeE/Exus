@@ -80,6 +80,13 @@
  			`id` = #{weightId}
  	</update>
  	
+ 	<delete id="deleteWeight" parameterType="int">
+ 		DELETE FROM 
+ 			`weight`
+ 		WHERE
+ 			`id` = #{weightId}
+ 	</delete>
+ 	
  	<insert id="insertDiet" parameterType="map">
  		INSERT INTO 
  			`diet`
@@ -112,6 +119,13 @@
  		WHERE
  			`id` = #{dietId}
  	</update>
+ 	
+ 	<delete id="deleteDiet" parameterType="int">
+ 		DELETE FROM 
+ 			`diet`
+ 		WHERE
+ 			`id` = #{dietId}
+ 	</delete>
  	
  	<select id="selectExercise" parameterType="map" resultType="com.soyaa.exus.exercise.model.ExerciseRecord">
  		SELECT 
