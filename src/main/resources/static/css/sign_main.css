@@ -8,6 +8,16 @@
 	margin-top: 20px;
 }
 
+
+
+.user-or-team {
+	background-color: #f6f6f6; 
+	width: 150px;
+	height: 50px;
+	border: 1px solid #000000;
+	border-radius: 0.1em;
+}
+
 .updateUser {
 	background-color: #e2e2e2;
 	width: 100px;
