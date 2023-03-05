@@ -36,7 +36,7 @@
 			</div>
 		</header>
 		
-		<!-- 
+		
 		<div  id="updateBtn" class="">
 			<div>		
 				<div class="user-or-team d-flex justify-content-center align-items-center">
@@ -51,7 +51,7 @@
 			</div>
 		</div>
 		
-		
+		<!-- 
 		<div class="d-flex justify-content-end">		
 			<div class="updateUser d-none justify-content-center align-items-center" id="updateBtn">
 				<a href="#" class="text-white font-weight-bold">정보수정</a>
