@@ -3,6 +3,6 @@
 
 		<header>
 			<a href="#" class="text-decoration-none">
-				<h1 class="text-white font-weight-bold pt-1 ml-2">Exus</h1>
+				<h1 class="text-white font-weight-bold pt-1 pl-2">Exus</h1>
 			</a>
 		</header>
