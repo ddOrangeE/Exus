@@ -8,8 +8,8 @@ public interface PostDAO {
 	
 	// 게시물 작성
 	public int insertPost(
-			@Param("authorId") int authorId
-			, @Param("keyword") String keyword
+			@Param("userId") int userId
+			, @Param("missionId") int missionId
 			, @Param("content") String content
 			, @Param("imagePath") String imagePath);
 

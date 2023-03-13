@@ -8,8 +8,8 @@
  		INSERT INTO
  			`post`
  		(
- 			`authorId`
- 			, `keyword`
+ 			`userId`
+ 			, `missionId`
  			, `content`
  			, `imagePath`
  			, `createdAt`
@@ -17,8 +17,8 @@
  		)
  		VALUES
  		(
- 			#{authorId}
- 			, #{keyword}
+ 			#{userId}
+ 			, #{missionId}
  			, #{content}
  			, #{imagePath}
  			, now()

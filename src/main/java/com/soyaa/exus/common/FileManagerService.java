@@ -17,11 +17,11 @@ public class FileManagerService {
 	private static Logger logger = LoggerFactory.getLogger(FileManagerService.class);
 
 	// 파일을 저장할 수 있는 메소드
-	public static String saveFile(int authorId, String keyword, MultipartFile file) {
+	public static String saveFile(int userId, MultipartFile file) {
 		
 		// authorId_unixtime
 		// 2_29192120
-		String directoryName = "/" + authorId + keyword + "_" + System.currentTimeMillis() + "/";
+		String directoryName = "/" + userId + "_" + System.currentTimeMillis() + "/";
 		
 		// 디렉토리 생성
 		String filePath = FILE_UPLOAD_PATH + directoryName;

@@ -14,16 +14,19 @@ public class PostBO {
 	private PostDAO postDAO;
 	
 	// 게시글 정보를 전달받아서 저장
-	public int addPost(int authorId, String keyword, String content, MultipartFile file) {
+	public int addPost(int userId, String content, MultipartFile file) {
 		
-		String imagePath = FileManagerService.saveFile(authorId, keyword, file);
+		String imagePath = FileManagerService.saveFile(userId, file);
+		
+		// 임시 미션아이디
+		int missionId = 1;
 		
 		// 파일 업로드가 문제가 있으면, insert 진행하지 않고, 입력이 진행되지 않는다는 return 값 만들어주기
 		if(imagePath == null) {
 			return 0;
 		}
 		
-		return postDAO.insertPost(authorId, keyword, content, imagePath);
+		return postDAO.insertPost(userId, missionId, content, imagePath);
 	}
 	
 }

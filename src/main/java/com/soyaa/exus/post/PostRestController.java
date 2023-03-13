@@ -25,16 +25,15 @@ public class PostRestController {
 	// 게시물 등록
 	@PostMapping("/create")
 	public Map<String, String> postCreate(
-			@RequestParam("keyword") String keyword
-			, @RequestParam(value="content", required=false) String content
+			@RequestParam(value="content", required=false) String content
 			, @RequestParam("file") MultipartFile file
 			, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		
-		int authorId = (Integer)session.getAttribute("userId");
+		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = postBO.addPost(authorId, keyword, content, file);
+		int count = postBO.addPost(userId, content, file);
 		
 		Map<String, String> result = new HashMap<>();
 		

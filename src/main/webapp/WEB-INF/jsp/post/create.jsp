@@ -34,7 +34,7 @@
 	                    <h1 class="text-secondary">create my story</h1>    
 	                </div>
 	                <div class="d-flex justify-content-end">
-	                    <button type="button" class="btn btn-secondary col-1 mt-2">작성</button>
+	                    <button type="button" class="btn btn-secondary col-1 mt-2" id="uploadBtn">작성</button>
 	                </div>
 	
 	              	<textarea cols="150" rows="15" maxlength="500" id="textBox" class="form-control btn-light outline introduce-font mt-2" placeholder="내용을 입력해주세요."></textarea>
@@ -45,8 +45,8 @@
 	
 	                <%-- 이미지 변경 또는 생성 --%>
 					<div class="add-image d-flex justify-content-center align-items-center mt-1">
-						<a href="#" class="font-weight-bold text-white text-decoration-none">이미지 변경 또는 생성</a>
-						<input type="file" class="d-none">
+						<a href="#" class="font-weight-bold text-white text-decoration-none" id="imageInputBtn">이미지 변경 또는 생성</a>
+						<input type="file" class="d-none" id="fileInput">
 					</div>
 					<%-- 이미지 변경 또는 생성 --%>
 	
@@ -57,6 +57,46 @@
     </body>
 	<script>
 		$(document).ready(function() {
+			
+			$("#uploadBtn").on("click", function() {
+				
+				let content = $("#textBox").val();
+				
+				if($("#fileInput")[0].files.length == 0) {
+					alert("이미지를 선택해주세요.");
+					return;
+				}
+				
+				let formData = new FormData();
+				formData.append("content", content);
+				formData.append("file", $("#fileInput")[0].files[0]);
+				
+				$.ajax({
+					type:"post"
+					, url:"/post/create"
+					, data:formData
+					, enctype:"multipart/form-data"
+					, processData:false
+					, contentType:false
+					
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href = "/post/timeline/view";
+						} else {
+							alert("업로드 실패");
+						}
+					}
+					, error:function() {
+						alert("업로드 에러");
+					}
+				});
+				
+			});
+			
+			// 이미지 추가
+			$("#imageInputBtn").on("click", function() {
+				$("#fileInput").click();
+			});
 			
 			$("#textBox").on("input", function (e) {
 				let content = $(this).val();
