@@ -210,17 +210,18 @@
 
 	$(document).ready(function() {
 		
-		var sideBar = false;
-		$("#sideBarIcon").on("click", function() {
-			if(!sideBar) {
-				$(".sidebar-all").removeClass("d-none");
-				sideBar = true;
-			} else {
-				$(".sidebar-all").addClass("d-none");
-				sideBar = false;
-			}
+		// 사이드바
+		//var sideBar = false;
+		//$("#sideBarIcon").on("click", function() {
+			//if(!sideBar) {
+				//$(".sidebar-all").removeClass("d-none");
+				//sideBar = true;
+			//} else {
+				//$(".sidebar-all").addClass("d-none");
+				//sideBar = false;
+			//}
 			
-		});
+		//});
 		
 		
 		var updateBtnResult = false;

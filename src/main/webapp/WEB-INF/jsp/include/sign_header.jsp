@@ -61,3 +61,25 @@
 			</div>
 		</div>
 		
+		<script>
+			$(document).ready(function() {
+				var updateBtnResult = false;
+				
+				$("#userNameUpdateBtn").on("click", function() {
+					
+					if(!updateBtnResult) {
+						updateBtnResult = true;
+						$("#updateBtn").removeClass("d-none");	
+						$("#updateBtn").addClass("d-flex");
+					} else {
+						updateBtnResult = false;
+						$("#updateBtn").addClass("d-none");
+						$("#updateBtn").removeClass("d-flex");
+					}
+					
+					
+				});
+				
+			});
+		</script>
+		

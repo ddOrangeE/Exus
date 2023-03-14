@@ -46,4 +46,7 @@ public class PostRestController {
 		return result;
 	}
 	
+	// 게시물 삭제
+	
+	
 }

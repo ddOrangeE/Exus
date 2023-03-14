@@ -52,3 +52,21 @@
 		        </ul>
 		    </nav>
 		</div>
+		
+		<script>
+			$(document).ready(function() {
+				
+			  	var sideBar = false;
+			  	$("#sideBarIcon").on("click", function() {
+			  		if(!sideBar) {
+			  			$(".sidebar-all").removeClass("d-none");
+			  			sideBar = true;
+			  		} else {
+			  			$(".sidebar-all").addClass("d-none");
+						sideBar = false;
+					}
+			  			
+				});
+				
+			});
+		</script>
