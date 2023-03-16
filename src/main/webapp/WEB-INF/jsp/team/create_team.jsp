@@ -38,22 +38,22 @@
 	                <div class="d-flex align-items-center no-gutters">
 	                	<div class="col-8 d-flex align-items-center">	                	
 	                		<span class="font-weight-bold pr-3">팀 이름 : </span> 
-		                	<input type="text" class="form-control btn-light outline col-5">
+		                	<input type="text" class="form-control btn-light outline col-5" id="teamName">
 	                	</div>
 	                	<div class="d-flex justify-content-end col-4">
 		                    <button type="button" class="btn btn-secondary mt-2" id="uploadBtn">만들기</button>	                	
 	                	</div>
 	                </div>
 					
-					<textarea cols="150" rows="15" maxlength="500" id="textBox" class="form-control btn-light outline introduce-font mt-2" placeholder="팀 소개"></textarea>
+					<textarea cols="150" rows="15" maxlength="150" id="textBox" class="form-control btn-light outline introduce-font mt-2" placeholder="팀 소개"></textarea>
 					<div class="textLengthWrap d-flex mt-1 justify-content-end">
 	    				<small class="textCount text-secondary">0자</small>
-	    				<small class="textTotal text-secondary">/500자</small>
+	    				<small class="textTotal text-secondary">/150자</small>
 	  				</div>
 	            
 	            	<div class="d-flex align-items-center">	            	
 						<span class="font-weight-bold pr-3">팀 정원 : </span>	            
-		            	<input type="text" class="form-control btn-light outline col-1 mr-2">
+		            	<input type="text" class="form-control btn-light outline col-1 mr-2" id="teamPersonnel">
 		                <span class="font-weight-bold pr-3">명</span>
 	            	</div>
 	                <%-- 이미지 변경 또는 생성 --%>
@@ -77,6 +77,66 @@
 	<script>
 		$(document).ready(function() {
 			
+			// 팀 생성
+			$("#uploadBtn").on("click", function() {
+				
+				let name = $("#teamName").val();
+				
+				let introduce = $("#textBox").val();
+				
+				let personnel = $("#teamPersonnel").val();
+				
+				if(name == "") {
+					alert("팀 이름을 입력해주세요.");
+					return;
+				}
+				
+				if(introduce == "") {
+					alert("팀 소개를 작성해주세요.");
+					return
+				}
+				
+				if(personnel == "") {
+					alert("팀 정원을 입력해주세요.");
+					return;
+				}
+				
+				if($("#fileInput")[0].files.length == 0) {
+					alert("이미지를 선택해주세요.");
+					return;
+				}
+				
+				let formData = new FormData();
+				formData.append("name", name);
+				formData.append("introduce", introduce);
+				formData.append("personnel", personnel);
+				formData.append("file", $("#fileInput")[0].files[0]);
+				
+				$.ajax({
+					type:"post"
+					, url:"/team/create"
+					, data:formData
+					, enctype:"multipart/form-data"
+					, processData:false
+					, contentType:false
+					
+					, success:function(data) {
+						if(data.result == "success") {
+							location.href = "/post/team/view";
+						} else {
+							alert("팀 생성 실패");
+						}
+					}
+					, error:function() {
+						alert("팀 생성 에러");
+					}
+				});
+				
+				
+			});
+			
+			
+			
 			// 이미지 추가
 			$("#imageInputBtn").on("click", function() {
 				$("#fileInput").click();
@@ -86,12 +146,12 @@
 				let content = $(this).val();
 			    
 			    // 글자수 제한
-			    if (content.length > 500) {
+			    if (content.length > 150) {
 			    	// 100자 부터는 타이핑 되지 않도록
-			        $(this).val($(this).val().substring(0, 500));
+			        $(this).val($(this).val().substring(0, 150));
 			    	content = $(this).val();
 			        // 100자 넘으면 알림창 뜨도록
-			        alert("글자수는 500자까지 입력 가능합니다.");
+			        alert("글자수는 150자까지 입력 가능합니다.");
 			    };
 			    
 			    // 글자수 세기
